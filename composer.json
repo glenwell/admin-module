@@ -1,0 +1,35 @@
+{
+    "name": "glenwell/admin-module",
+    "description": "Admin module based on TCG's Laravel Voyager",
+    "keywords": ["laravel", "admin", "panel"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Josh Danns",
+            "email": "dannsj@gmail.com"
+        }
+    ],
+    "type": "laravel-module",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Admin\\Providers\\AdminServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Admin\\": ""
+        }
+    },
+    "require": {
+        "joshbrw/laravel-module-installer": "^0.1.4",
+        "laravel/framework": "~5.4.36|~5.5.0|~5.6.0|~5.7.0",
+        "nwidart/laravel-modules": "^4.0",
+        "tcg/voyager": "^1.1"
+    },
+    "minimum-stability": "dev"
+}
