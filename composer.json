@@ -19,7 +19,7 @@
                 
             },
             "dont-discover": [
-                "nwidart/laravel-modules"
+                "tcg/voyager"
             ]
         }
     },
