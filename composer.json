@@ -19,7 +19,6 @@
                 
             },
             "dont-discover": [
-                "tcg/voyager",
                 "nwidart/laravel-modules"
             ]
         }
@@ -30,12 +29,12 @@
         }
     },
     "require": {
-        "tcg/voyager": "^1.1",
-        "joshbrw/laravel-module-installer": "^0.1.4"
+        "joshbrw/laravel-module-installer": "^0.1.4",
+        "nwidart/laravel-modules": "^4.0",
+        "tcg/voyager": "^1.1"
     },
     "require-dev": {
-        "laravel/framework": "~5.4.36|~5.5.0|~5.6.0|~5.7.0",
-        "nwidart/laravel-modules": "^4.0"
+        "laravel/framework": "~5.4.36|~5.5.0|~5.6.0|~5.7.0"
     },
     "minimum-stability": "dev"
 }
