@@ -67,22 +67,27 @@ class InstallCommand extends \TCG\Voyager\Commands\InstallCommand
         $this->info('Seeding data into the database');
         $this->seed('VoyagerDatabaseSeeder');
 
-        if ($this->option('with-dummy')) {
-            $this->info('Publishing dummy content');
-            $tags = ['dummy_seeds', 'dummy_content', 'dummy_config', 'dummy_migrations'];
-            $this->call('vendor:publish', ['--provider' => VoyagerDummyServiceProvider::class, '--tag' => $tags]);
-
-            $this->info('Migrating dummy tables');
-            $this->call('migrate');
-
-            $this->info('Seeding dummy data');
-            $this->seed('VoyagerDummyDatabaseSeeder');
+        /* if ($this->option('with-dummy')) {
+            //
         } else {
             $this->call('vendor:publish', ['--provider' => VoyagerServiceProvider::class, '--tag' => 'config']);
-        }
+        } */
+
+
+        //Publish with dummy content by default
+        $this->info('Publishing dummy content');
+        $tags = ['dummy_seeds', 'dummy_content', 'dummy_config', 'dummy_migrations'];
+        $this->call('vendor:publish', ['--provider' => VoyagerDummyServiceProvider::class, '--tag' => $tags]);
+
+        $this->info('Migrating dummy tables');
+        $this->call('migrate');
+
+        $this->info('Seeding dummy data');
+        $this->seed('VoyagerDummyDatabaseSeeder');
 
         $this->info('Setting up the hooks');
         $this->call('hook:setup');
+        //End of dummy content
 
         $this->info('Adding the storage symlink to your public folder');
         $this->call('storage:link');

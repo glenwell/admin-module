@@ -150,16 +150,16 @@ return [
             'Profile' => [
                 'route'      => 'voyager.profile',
                 'classes'    => 'class-full-of-rum',
-                'icon_class' => 'voyager-person',
+                'icon_class' => 'icon-user',
             ],
             'Home' => [
                 'route'        => '/',
-                'icon_class'   => 'voyager-home',
+                'icon_class'   => 'icon-home',
                 'target_blank' => true,
             ],
             'Logout' => [
                 'route'      => 'voyager.logout',
-                'icon_class' => 'voyager-power',
+                'icon_class' => 'icon-power',
             ],
         ],
 
@@ -207,7 +207,7 @@ return [
 
     // Here you can specify additional assets you would like to be included in the master.blade
     'additional_css' => [
-        //'css/custom.css',
+        'vendor/admin/assets/css/simple-line-icons.css',
     ],
 
     'additional_js' => [
