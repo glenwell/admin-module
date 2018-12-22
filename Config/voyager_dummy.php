@@ -3,7 +3,7 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | User config --Edited2
+    | User config -- Admin Dummy
     |--------------------------------------------------------------------------
     |
     | Here you can specify voyager user configs
@@ -43,7 +43,7 @@ return [
     */
 
     'models' => [
-        //'namespace' => 'App\\',
+        'namespace' => 'App\\Models\\',
     ],
 
     /*
