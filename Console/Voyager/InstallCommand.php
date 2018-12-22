@@ -15,7 +15,7 @@ class InstallCommand extends \TCG\Voyager\Commands\InstallCommand
 {
     use Seedable;
 
-    protected $seedersPath = __DIR__.'/../../publishable/database/seeds/';
+    protected $seedersPath = __DIR__.'/../../database/seeds/';
 
     /**
      * The console command name.
@@ -121,7 +121,7 @@ class InstallCommand extends \TCG\Voyager\Commands\InstallCommand
 
     private function changeDefaultStringLength()
     {
-        if (file_exists(app_path('Providers\AppServiceProvider.php'))) {
+        if ($this->version()) {
             
             $str = file_get_contents(app_path('Providers\AppServiceProvider.php'));  
 
@@ -134,5 +134,21 @@ class InstallCommand extends \TCG\Voyager\Commands\InstallCommand
                 exit;
             }
         }
+    }
+
+    private function version()
+    {
+        $pdo     = \DB::connection()->getPdo();
+
+        $version = $pdo->query('select version()')->fetchColumn();
+
+        (float)$version = mb_substr($version, 0, 6);
+        
+        // mysql >= 5.6 has fulltext index support
+        if ($version < '5.7.7') {
+            return true;
+        }
+
+        return false;
     }
 }
