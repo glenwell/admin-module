@@ -69,17 +69,17 @@ class VoyagerServiceProvider extends \TCG\Voyager\VoyagerServiceProvider
      */
     private function registerPublishableResources()
     {
-        $publishablePath = dirname(__DIR__).'/publishable';
+        $publishablePath = dirname(__DIR__);
 
         $publishable = [
             'voyager_assets' => [
-                "{$publishablePath}/assets/" => public_path(config('voyager.assets_path')),
+                "{$publishablePath}/resources/assets/" => public_path(config('voyager.assets_path')),
             ],
             'seeds' => [
                 "{$publishablePath}/database/seeds/" => database_path('seeds'),
             ],
             'config' => [
-                "{$publishablePath}/config/voyager.php" => config_path('voyager.php'),
+                "{$publishablePath}/publishable/config/voyager.php" => config_path('voyager.php'),
             ],
 
         ];

@@ -28,7 +28,7 @@ return [
     */
 
     'controllers' => [
-        'namespace' => 'TCG\\Voyager\\Http\\Controllers',
+        'namespace' => 'Modules\\Admin\\Http\\Controllers\\Voyager',
     ],
 
     /*

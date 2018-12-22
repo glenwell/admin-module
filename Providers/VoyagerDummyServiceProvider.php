@@ -26,14 +26,14 @@ class VoyagerDummyServiceProvider extends ServiceProvider
      */
     private function registerPublishableResources()
     {
-        $publishablePath = dirname(__DIR__).'/publishable';
+        $publishablePath = dirname(__DIR__);
 
         $publishable = [
             'dummy_seeds' => [
-                "{$publishablePath}/database/dummy_seeds/" => database_path('seeds'),
+                "{$publishablePath}/database/seeds/dummy/" => database_path('seeds'),
             ],
             'dummy_content' => [
-                "{$publishablePath}/dummy_content/" => storage_path('app/public'),
+                "{$publishablePath}/publishable/dummy_content/" => storage_path('app/public'),
             ],
             'dummy_config' => [
                 "{$publishablePath}/config/voyager_dummy.php" => config_path('voyager.php'),
@@ -52,7 +52,7 @@ class VoyagerDummyServiceProvider extends ServiceProvider
     public function registerConfigs()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__).'/publishable/config/voyager_dummy.php', 'voyager'
+            dirname(__DIR__).'/config/voyager_dummy.php', 'voyager'
         );
     }
 }

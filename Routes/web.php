@@ -11,10 +11,6 @@
 |
 */
 
-/* Route::prefix('admin')->group(function() {
-    Route::get('/', 'AdminController@index');
-}); */
-
 Route::group(['prefix' => 'backend'], function () {
     Voyager::routes();
 });
