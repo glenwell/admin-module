@@ -121,31 +121,26 @@ class InstallCommand extends \TCG\Voyager\Commands\InstallCommand
 
     private function changeDefaultStringLength()
     {
-        if ($this->version()) {
-            
-            $str = file_get_contents(app_path('Providers\AppServiceProvider.php'));  
-
-            if($str !== false && !str_contains($str, 'Schema::defaultStringLength(191)')) {
-
-                file_put_contents(app_path('Providers\AppServiceProvider.php'), file_get_contents(__DIR__.'/../stubs/app-service-provider.stub'));
-                
-                $this->info('Schema::defaultSringLength has been set. You can now run "php artisan admin:install"');
-
-                exit;
+        if($this->version()) {
+            if (file_exists(app_path('Providers\AppServiceProvider.php'))) {
+                $str = file_get_contents(app_path('Providers\AppServiceProvider.php'));  
+    
+                if($str !== false && !str_contains($str, 'Schema::defaultStringLength(191)')) {
+                    file_put_contents(app_path('Providers\AppServiceProvider.php'), file_get_contents(__DIR__.'/../stubs/app-service-provider.stub'));
+                    $this->info('Schema::defaultSringLength has been set. You can now run "php artisan admin:install"');
+                    exit;
+                }
             }
         }
     }
 
     private function version()
     {
-        $pdo     = \DB::connection()->getPdo();
-
+        $pdo = \DB::connection()->getPdo();
         $version = $pdo->query('select version()')->fetchColumn();
-
         (float)$version = mb_substr($version, 0, 6);
         
-        // mysql >= 5.6 has fulltext index support
-        if ($version < '5.7.7') {
+        if (version_compare($version, "5.7.7", "<=")) {
             return true;
         }
 
