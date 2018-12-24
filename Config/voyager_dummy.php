@@ -59,6 +59,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Path to the Voyager Blade Views
+    |--------------------------------------------------------------------------
+    |
+    | Here you can specify the location of the voyager blade views
+    |
+    */
+
+    'blade_path' => '/vendor/voyager',
+
+    /*
+    |--------------------------------------------------------------------------
     | Storage Config
     |--------------------------------------------------------------------------
     |
@@ -160,9 +171,9 @@ return [
         ],
 
         'widgets' => [
-            'TCG\\Voyager\\Widgets\\UserDimmer',
-            'TCG\\Voyager\\Widgets\\PostDimmer',
-            'TCG\\Voyager\\Widgets\\PageDimmer',
+            'Modules\\Admin\\Widgets\\UserDimmer',
+            'Modules\\Admin\\Widgets\\PostDimmer',
+            'Modules\\Admin\\Widgets\\PageDimmer',
         ],
 
     ],
@@ -199,7 +210,7 @@ return [
     |
     */
 
-    'primary_color' => '#22A7F0',
+    'primary_color' => '#1ab394',
 
     'show_dev_tips' => true, // Show development tip "How To Use:" in Menu and Settings
 

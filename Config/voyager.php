@@ -201,7 +201,7 @@ return [
     |
     */
 
-    'primary_color' => '#ed181f',
+    'primary_color' => '#1ab394',
 
     'show_dev_tips' => true, // Show development tip "How To Use:" in Menu and Settings
 
