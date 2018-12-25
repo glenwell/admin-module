@@ -1,6 +1,6 @@
 <?php
 
-namespace TCG\Voyager\Widgets;
+namespace Modules\Admin\Widgets;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;

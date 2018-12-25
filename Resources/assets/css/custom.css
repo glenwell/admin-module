@@ -1,0 +1,74 @@
+#dataTable_wrapper .row:nth-of-type(1) .col-sm-6:nth-of-type(1) {
+    padding-left: 30px;
+}
+
+#dataTable_wrapper .row:nth-of-type(1) .col-sm-6:nth-of-type(2) {
+    padding-right: 30px;
+}
+
+#dataTable_wrapper .row:nth-of-type(2) .col-sm-12 {
+    padding: 0 0;
+}
+
+#dataTable_wrapper .row:nth-of-type(3) .col-sm-5 {
+    padding-left: 30px;
+}
+
+#dataTable_wrapper .row:nth-of-type(3) .col-sm-7 {
+    padding-right: 30px;
+}
+
+.px-3 {
+    padding: 0 30px;
+}
+
+.navbar .dropdown.profile .dropdown-menu li.profile-img img.profile-img {
+    margin: 10px;
+    margin-left: 0;
+}
+
+.navbar .dropdown.profile .dropdown-menu h5, .navbar .dropdown.profile .dropdown-menu h6 {
+    margin-bottom: 5px;
+}
+
+.navbar .dropdown.profile .dropdown-menu h5, .navbar .dropdown.profile .dropdown-menu h5 {
+    font-weight: 600;
+}
+
+.dropdown-menu .divider {
+    margin-top: 10px;
+}
+
+.app-container .side-menu .panel.widget a {
+    display: block;
+}
+
+.custom-dimmer {
+    padding: 10px !important;
+    margin-bottom:0 !important;
+    overflow:hidden !important;
+}
+
+.custom-dimmer .dimmer {
+    background: linear-gradient(45deg,rgba(45,53,61,.79) 0,rgba(45,53,61,.2) 100%) !important;
+}
+
+.custom-dimmer .panel-content .row {
+    padding: 0 !important;
+}
+
+.custom-dimmer .panel-content .row .custom-dimmer-link [class*="col-"]{
+    margin-bottom: 0;
+}
+
+.custom-dimmer .panel-content .row .custom-dimmer-link [class*="col-"] i{
+    margin: 0;
+    background: none;
+    font-size: 64px;
+}
+
+.custom-dimmer .panel-content .row .custom-dimmer-link [class*="col-"] h4{
+    font-weight: 400;
+    font-size: 30px;
+    margin: 1em 0;
+}

@@ -147,11 +147,6 @@ return [
     'dashboard' => [
         // Add custom list items to navbar's dropdown
         'navbar_items' => [
-            'Profile' => [
-                'route'      => 'voyager.profile',
-                'classes'    => 'class-full-of-rum',
-                'icon_class' => 'icon-user',
-            ],
             'Home' => [
                 'route'        => '/',
                 'icon_class'   => 'icon-home',
@@ -208,6 +203,7 @@ return [
     // Here you can specify additional assets you would like to be included in the master.blade
     'additional_css' => [
         'vendor/admin/assets/css/simple-line-icons.css',
+        'vendor/admin/assets/css/custom.css',
     ],
 
     'additional_js' => [
