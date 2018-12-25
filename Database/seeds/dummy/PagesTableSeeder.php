@@ -24,7 +24,7 @@ class PagesTableSeeder extends Seeder
                 'name'                  => 'pages',
                 'display_name_singular' => __('voyager::seeders.data_types.page.singular'),
                 'display_name_plural'   => __('voyager::seeders.data_types.page.plural'),
-                'icon'                  => 'voyager-file-text',
+                'icon'                  => 'icon-book-3',
                 'model_name'            => 'TCG\\Voyager\\Models\\Page',
                 'controller'            => '',
                 'generate_permissions'  => 1,
@@ -240,7 +240,7 @@ class PagesTableSeeder extends Seeder
         if (!$menuItem->exists) {
             $menuItem->fill([
                 'target'     => '_self',
-                'icon_class' => 'voyager-file-text',
+                'icon_class' => 'icon-book-3',
                 'color'      => null,
                 'parent_id'  => null,
                 'order'      => 7,

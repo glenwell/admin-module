@@ -22,7 +22,7 @@ class PostsTableSeeder extends Seeder
                 'name'                  => 'posts',
                 'display_name_singular' => __('voyager::seeders.data_types.post.singular'),
                 'display_name_plural'   => __('voyager::seeders.data_types.post.plural'),
-                'icon'                  => 'voyager-news',
+                'icon'                  => 'icon-article-2',
                 'model_name'            => 'TCG\\Voyager\\Models\\Post',
                 'policy_name'           => 'TCG\\Voyager\\Policies\\PostPolicy',
                 'controller'            => '',
@@ -310,7 +310,7 @@ class PostsTableSeeder extends Seeder
         if (!$menuItem->exists) {
             $menuItem->fill([
                 'target'     => '_self',
-                'icon_class' => 'voyager-news',
+                'icon_class' => 'icon-article-2',
                 'color'      => null,
                 'parent_id'  => null,
                 'order'      => 6,

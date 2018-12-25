@@ -24,7 +24,7 @@ class CategoriesTableSeeder extends Seeder
                 'slug'                  => 'categories',
                 'display_name_singular' => __('voyager::seeders.data_types.category.singular'),
                 'display_name_plural'   => __('voyager::seeders.data_types.category.plural'),
-                'icon'                  => 'voyager-categories',
+                'icon'                  => 'icon-grid-squares-2',
                 'model_name'            => 'TCG\\Voyager\\Models\\Category',
                 'controller'            => '',
                 'generate_permissions'  => 1,
@@ -168,7 +168,7 @@ class CategoriesTableSeeder extends Seeder
         if (!$menuItem->exists) {
             $menuItem->fill([
                 'target'     => '_self',
-                'icon_class' => 'voyager-categories',
+                'icon_class' => 'icon-grid-squares-2',
                 'color'      => null,
                 'parent_id'  => null,
                 'order'      => 8,
