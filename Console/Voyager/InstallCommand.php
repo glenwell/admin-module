@@ -76,7 +76,7 @@ class InstallCommand extends \TCG\Voyager\Commands\InstallCommand
 
         //Publish with dummy content by default
         $this->info('Publishing dummy content');
-        $tags = ['dummy_seeds', 'dummy_content', 'dummy_config', 'dummy_migrations'];
+        $tags = ['dummy_content', 'dummy_config', 'dummy_migrations'];
         $this->call('vendor:publish', ['--provider' => VoyagerDummyServiceProvider::class, '--tag' => $tags]);
 
         $this->info('Migrating dummy tables');

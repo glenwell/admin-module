@@ -141,23 +141,6 @@ class PostsTableSeeder extends Seeder
                     ],
                     'quality'    => '70%',
                     'upsize'     => true,
-                    'thumbnails' => [
-                        [
-                            'name'  => 'medium',
-                            'scale' => '50%',
-                        ],
-                        [
-                            'name'  => 'small',
-                            'scale' => '25%',
-                        ],
-                        [
-                            'name' => 'cropped',
-                            'crop' => [
-                                'width'  => '300',
-                                'height' => '250',
-                            ],
-                        ],
-                    ],
                 ],
                 'order' => 7,
             ])->save();

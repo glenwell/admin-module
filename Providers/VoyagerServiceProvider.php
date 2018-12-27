@@ -80,7 +80,7 @@ class VoyagerServiceProvider extends \TCG\Voyager\VoyagerServiceProvider
                 "{$publishablePath}/database/seeds/" => database_path('seeds'),
             ],
             'config' => [
-                "{$publishablePath}/publishable/config/voyager.php" => config_path('voyager.php'),
+                "{$publishablePath}/config/voyager.php" => config_path('voyager.php'),
             ],
 
         ];

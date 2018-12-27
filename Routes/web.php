@@ -14,3 +14,8 @@
 Route::group(['prefix' => 'backend'], function () {
     Voyager::routes();
 });
+
+Route::get(config('imagecache.route').'/{template}/{filename}', [
+    'uses' => 'Modules/Admin/Http/Controllers/Intervention/ImageCacheController@getResponse',
+    'as'   => 'imagecache'
+])->where('filename', '[ \w\\.\\/\\-\\@]+');

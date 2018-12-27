@@ -29,14 +29,13 @@ class VoyagerDummyServiceProvider extends ServiceProvider
         $publishablePath = dirname(__DIR__);
 
         $publishable = [
-            'dummy_seeds' => [
-                "{$publishablePath}/database/seeds/dummy/" => database_path('seeds'),
-            ],
             'dummy_content' => [
                 "{$publishablePath}/publishable/dummy_content/" => storage_path('app/public'),
             ],
             'dummy_config' => [
                 "{$publishablePath}/config/voyager_dummy.php" => config_path('voyager.php'),
+                "{$publishablePath}/config/imagecache.php" => config_path('imagecache.php'),
+                "{$publishablePath}/config/config.php" => config_path('admin.php'),
             ],
             'dummy_migrations' => [
                 "{$publishablePath}/database/migrations/" => database_path('migrations'),
