@@ -27,24 +27,27 @@ abstract class BaseFilter implements FilterInterface
             //Image large enough to add watermark
             if($dimensions->width >= $minWidth && $dimensions->height >= $minHeight) {
                 
-                $path = config('admin.images.watermark.path');
-                $watermark = Watermark::make($path);
+                $file = config('admin.images.watermark.path', public_path('vendor/admin/assets/images/watermark.png'));
 
-                $largerSide = $dimensions->width > $dimensions->height ? $dimensions->width : $dimensions->height;
+                if(file_exists($file)) {
+                    $watermark = Watermark::make($file);
 
-                //Calculate dimension of watermark
-                $waterMarkDimension = $largerSide * 0.1875;
-                //Calculate offset of image
-                $offset = floor($largerSide * 0.0125);
-                //Resize image accordingly
-                $watermark->resize($waterMarkDimension, $waterMarkDimension, function ($constraint) {
-                    $constraint->upsize();
-                });
+                    $largerSide = $dimensions->width > $dimensions->height ? $dimensions->width : $dimensions->height;
 
-                $position = $this->getWatermarkPosition();
-                
-                //Add watermark to the image to be saved
-                $image->insert($watermark, $position, $offset, $offset);
+                    //Calculate dimension of watermark
+                    $waterMarkDimension = $largerSide * 0.1875;
+                    //Calculate offset of image
+                    $offset = floor($largerSide * 0.0125);
+                    //Resize image accordingly
+                    $watermark->resize($waterMarkDimension, $waterMarkDimension, function ($constraint) {
+                        $constraint->upsize();
+                    });
+
+                    $position = $this->getWatermarkPosition();
+                    
+                    //Add watermark to the image to be saved
+                    $image->insert($watermark, $position, $offset, $offset);
+                }
 
                 return $image;
             }

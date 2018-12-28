@@ -19,45 +19,7 @@ class ImageCacheController extends \Intervention\Image\ImageCacheController
      */
     public function getResponse($template, $filename)
     {
-        switch (strtolower($template)) {
-            case 'original':
-                return $this->getOriginal($filename);
-
-            case 'download':
-                return $this->getDownload($filename);
-            
-            default:
-                return $this->getImage($template, $filename);
-        }
-    }
-
-    /**
-     * Get HTTP response of original image file
-     *
-     * @param  string $filename
-     * @return Illuminate\Http\Response
-     */
-    public function getOriginal($filename)
-    {
-        $path = $this->getImagePath($filename);
-
-        return $this->buildResponse(file_get_contents($path));
-    }
-
-    /**
-     * Get HTTP response of original image as download
-     *
-     * @param  string $filename
-     * @return Illuminate\Http\Response
-     */
-    public function getDownload($filename)
-    {
-        $response = $this->getOriginal($filename);
-
-        return $response->header(
-            'Content-Disposition',
-            'attachment; filename=' . $filename
-        );
+        return $this->getImage($template, $filename);
     }
 
     /**

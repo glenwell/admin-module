@@ -26,6 +26,8 @@ class AdminServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        // setup intervention/imagecache if package is installed
+        $this->cacheIsInstalled() ? $this->bootstrapImageCache() : null;
     }
 
     /**
@@ -37,6 +39,49 @@ class AdminServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(VoyagerServiceProvider::class);
+    }
+
+    /**
+     * Determines if Intervention Imagecache is installed
+     *
+     * @return boolean
+     */
+    private function cacheIsInstalled()
+    {
+        return class_exists('Intervention\\Image\\ImageCache');
+    }
+
+    /**
+     * Bootstrap imagecache
+     *
+     * @return void
+     */
+    private function bootstrapImageCache()
+    {
+        $app = $this->app;
+        $config = __DIR__.'/../config/imagecache.php';
+
+        $this->publishes([
+            $config => config_path('imagecache.php')
+        ]);
+
+        // merge default config
+        $this->mergeConfigFrom(
+            $config,
+            'imagecache'
+        );
+
+        // imagecache route
+        if (is_string(config('imagecache.route'))) {
+
+            $filename_pattern = '[ \w\\.\\/\\-\\@\(\)]+';
+
+            // route to access template applied image file
+            $app['router']->get(config('imagecache.route').'/{template}/{filename}', [
+                'uses' => '\Modules\Admin\Http\Controllers\Intervention\ImageCacheController@getResponse',
+                'as' => 'imagecache'
+            ])->where(['filename' => $filename_pattern]);
+        }
     }
 
     /**
