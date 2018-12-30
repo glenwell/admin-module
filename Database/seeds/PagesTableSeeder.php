@@ -5,7 +5,7 @@ use TCG\Voyager\Models\DataRow;
 use TCG\Voyager\Models\DataType;
 use TCG\Voyager\Models\Menu;
 use TCG\Voyager\Models\MenuItem;
-use TCG\Voyager\Models\Page;
+use Modules\Admin\Models\Page;
 use TCG\Voyager\Models\Permission;
 
 class PagesTableSeeder extends Seeder
@@ -25,7 +25,7 @@ class PagesTableSeeder extends Seeder
                 'display_name_singular' => __('voyager::seeders.data_types.page.singular'),
                 'display_name_plural'   => __('voyager::seeders.data_types.page.plural'),
                 'icon'                  => 'icon-book-3',
-                'model_name'            => 'TCG\\Voyager\\Models\\Page',
+                'model_name'            => 'Modules\\Admin\\Models\\Page',
                 'controller'            => '',
                 'generate_permissions'  => 1,
                 'description'           => '',

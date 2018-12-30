@@ -5,6 +5,7 @@ namespace Modules\Admin\Widgets;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use TCG\Voyager\Facades\Voyager;
+use Modules\Admin\Models\Post;
 
 class PostDimmer extends \TCG\Voyager\Widgets\PostDimmer
 {
@@ -21,7 +22,7 @@ class PostDimmer extends \TCG\Voyager\Widgets\PostDimmer
      */
     public function run()
     {
-        $count = Voyager::model('Post')->count();
+        $count = Post::count();
         $string = trans_choice('voyager::dimmer.post', $count);
 
         return view('voyager::dimmer', array_merge($this->config, [
@@ -42,6 +43,6 @@ class PostDimmer extends \TCG\Voyager\Widgets\PostDimmer
      */
     public function shouldBeDisplayed()
     {
-        return Auth::user()->can('browse', Voyager::model('Post'));
+        return Auth::user()->can('browse', app(Post::class));
     }
 }

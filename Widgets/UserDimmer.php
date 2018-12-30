@@ -5,6 +5,7 @@ namespace Modules\Admin\Widgets;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use TCG\Voyager\Facades\Voyager;
+use Modules\Admin\Models\User;
 
 class UserDimmer extends \TCG\Voyager\Widgets\UserDimmer
 {
@@ -21,7 +22,7 @@ class UserDimmer extends \TCG\Voyager\Widgets\UserDimmer
      */
     public function run()
     {
-        $count = Voyager::model('User')->count();
+        $count = User::count();
         $string = trans_choice('voyager::dimmer.user', $count);
 
         return view('voyager::dimmer', array_merge($this->config, [
@@ -42,6 +43,6 @@ class UserDimmer extends \TCG\Voyager\Widgets\UserDimmer
      */
     public function shouldBeDisplayed()
     {
-        return Auth::user()->can('browse', Voyager::model('User'));
+        return Auth::user()->can('browse', app(User::class));
     }
 }

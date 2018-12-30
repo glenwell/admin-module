@@ -27,11 +27,11 @@ return [
         'watermark' => [
 
             'enabled' => true,
-            'path' => public_path('images/watermark.png'),
+            'path' => public_path('vendor/admin/assets/images/watermark.png'),
             'default_position' => 8,
             'min_height' => 200,
             'min_width' => 200,
-            
+
         ]
     ],
 ];

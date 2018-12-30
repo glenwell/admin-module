@@ -4,7 +4,6 @@ namespace Modules\Admin\Console\Voyager;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Intervention\Image\ImageServiceProviderLaravel5;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Process\Process;
 use Modules\Admin\Providers\VoyagerDummyServiceProvider;
@@ -48,7 +47,6 @@ class InstallCommand extends \TCG\Voyager\Commands\InstallCommand
         $tags = ['voyager_assets', 'seeds'];
 
         $this->call('vendor:publish', ['--provider' => VoyagerServiceProvider::class, '--tag' => $tags]);
-        $this->call('vendor:publish', ['--provider' => ImageServiceProviderLaravel5::class]);
 
         $this->info('Attempting to set Voyager User model as parent to App\User');
         $this->extendUser();
@@ -66,13 +64,6 @@ class InstallCommand extends \TCG\Voyager\Commands\InstallCommand
 
         $this->info('Seeding data into the database');
         $this->seed('VoyagerDatabaseSeeder');
-
-        /* if ($this->option('with-dummy')) {
-            //
-        } else {
-            $this->call('vendor:publish', ['--provider' => VoyagerServiceProvider::class, '--tag' => 'config']);
-        } */
-
 
         //Publish with dummy content by default
         $this->info('Publishing dummy content');
