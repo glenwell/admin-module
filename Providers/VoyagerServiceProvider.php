@@ -27,7 +27,7 @@ class VoyagerServiceProvider extends \TCG\Voyager\VoyagerServiceProvider
         $loader->alias('Voyager', VoyagerFacade::class);
 
         $this->app->singleton('voyager', function () {
-            return new \TCG\Voyager\Voyager();
+            return new \Modules\Admin\Voyager\Voyager();
         });
 
         $this->loadHelpers();

@@ -136,11 +136,20 @@ class PostsTableSeeder extends Seeder
                 'delete'       => 1,
                 'details'      => [
                     'resize' => [
-                        'width'  => '1000',
-                        'height' => 'null',
+                        'width'  => '1280',
+                        'height' => '720',
                     ],
                     'quality'    => '70%',
                     'upsize'     => true,
+                    'thumbnails' => [
+                        [
+                            'name' => 'preview',
+                            'crop' => [
+                                'width'  => '100',
+                                'height' => '67',
+                            ],
+                        ],
+                    ],
                 ],
                 'order' => 7,
             ])->save();

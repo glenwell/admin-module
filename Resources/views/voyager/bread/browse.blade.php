@@ -102,8 +102,11 @@
                                         @foreach($dataType->browseRows as $row)
                                             
                                             <td>
+                                                @php
+                                                    $imageParams = ["template" => "dynamic", "params" => "?w=100&h=67"]
+                                                @endphp
                                                 @if($row->type == 'image')
-                                                    <img class="img-rounded" src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field} ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
+                                                    <img class="img-rounded" src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field}, "", $imageParams ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">
                                                 @elseif($row->type == 'relationship')
                                                     @include('voyager::formfields.relationship', ['view' => 'browse','options' => $row->details])
                                                 @elseif($row->type == 'select_multiple')
@@ -183,7 +186,7 @@
                                                     @if($images)
                                                         @php $images = array_slice($images, 0, 3); @endphp
                                                         @foreach($images as $image)
-                                                            <img src="@if( !filter_var($image, FILTER_VALIDATE_URL)){{ Voyager::image( $image ) }}@else{{ $image }}@endif" style="width:50px">
+                                                            <img src="@if( !filter_var($image, FILTER_VALIDATE_URL)){{ Voyager::image( $image, "", $imageParams ) }}@else{{ $image }}@endif" style="width:50px">
                                                         @endforeach
                                                     @endif
                                                 @else
