@@ -250,6 +250,14 @@
                         </div>
                         <div class="panel-body">
                             <div class="form-group">
+                                <label for="seo_title">{{ __('voyager::post.seo_title') }}</label>
+                                @include('voyager::multilingual.input-hidden', [
+                                    '_field_name'  => 'seo_title',
+                                    '_field_trans' => get_field_translations($dataTypeContent, 'seo_title')
+                                ])
+                                <input type="text" class="form-control" name="seo_title" placeholder="SEO Title" value="@if(isset($dataTypeContent->seo_title)){{ $dataTypeContent->seo_title }}@endif">
+                            </div>
+                            <div class="form-group">
                                 <label for="meta_description">{{ __('voyager::post.meta_description') }}</label>
                                 @include('voyager::multilingual.input-hidden', [
                                     '_field_name'  => 'meta_description',
@@ -264,14 +272,6 @@
                                     '_field_trans' => get_field_translations($dataTypeContent, 'meta_keywords')
                                 ])
                                 <textarea class="form-control" name="meta_keywords">@if(isset($dataTypeContent->meta_keywords)){{ $dataTypeContent->meta_keywords }}@endif</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="seo_title">{{ __('voyager::post.seo_title') }}</label>
-                                @include('voyager::multilingual.input-hidden', [
-                                    '_field_name'  => 'seo_title',
-                                    '_field_trans' => get_field_translations($dataTypeContent, 'seo_title')
-                                ])
-                                <input type="text" class="form-control" name="seo_title" placeholder="SEO Title" value="@if(isset($dataTypeContent->seo_title)){{ $dataTypeContent->seo_title }}@endif">
                             </div>
                         </div>
                     </div>

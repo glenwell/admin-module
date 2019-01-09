@@ -72,3 +72,37 @@
     font-size: 30px;
     margin: 1em 0;
 }
+
+ul.list-separated > li {
+    border-bottom: 1px solid #f1f1f1;
+    padding: 0.875rem 0;
+    color: #818a91;
+    font-weight: 400;
+}
+ul.list-separated > li .row [class*="col-"] {
+    margin-bottom:0;
+}
+ul.list-separated > li .row .post-key {
+    opacity: 0.6;
+}
+ul.list-separated > li:last-child {
+    border: 0 !important;
+}
+.post-container {
+    padding:15px;
+    font-size: 16px;
+    color: #55595c;
+    font-weight: 400;
+}
+.post-container .post-body {
+    padding-top:10px;
+}
+.post-body img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+.post-body figcaption {
+    text-align: center;
+}

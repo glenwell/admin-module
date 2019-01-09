@@ -42,4 +42,26 @@ class Voyager extends \TCG\Voyager\Voyager
         // We merge original name + type + extension
         return $name.'-'.$type.'.'.$ext;
     }
+
+    protected function findVersion()
+    {
+        if (!is_null($this->version)) {
+            return;
+        }
+
+        if ($this->filesystem->exists(base_path('composer.lock'))) {
+            // Get the composer.lock file
+            $file = json_decode(
+                $this->filesystem->get(base_path('composer.lock'))
+            );
+
+            // Loop through all the packages and get the version of voyager
+            foreach ($file->packages as $package) {
+                if ($package->name == 'glenwell/admin-module') {
+                    $this->version = $package->version;
+                    break;
+                }
+            }
+        }
+    }
 }
