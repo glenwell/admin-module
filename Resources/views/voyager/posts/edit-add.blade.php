@@ -83,8 +83,7 @@
 
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                <i class="voyager-character"></i> {{ __('voyager::post.title') }}
-                                <span class="panel-desc"> {{ __('voyager::post.title_sub') }}</span>
+                                <i class="icon-pencil2"></i> {{ __('voyager::post.title') }}
                             </h3>
                             <div class="panel-actions">
                                 <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
@@ -102,7 +101,9 @@
                     <!-- ### CONTENT ### -->
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title">{{ __('voyager::post.content') }}</h3>
+                            <h3 class="panel-title">
+                                <i class="icon-newspaper"></i> {{ __('voyager::post.content') }}
+                            </h3>
                             <div class="panel-actions">
                                 <a class="panel-action voyager-resize-full" data-toggle="panel-fullscreen" aria-hidden="true"></a>
                             </div>
@@ -124,7 +125,9 @@
                     <!-- ### EXCERPT ### -->
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title">{!! __('voyager::post.excerpt') !!}</h3>
+                            <h3 class="panel-title">
+                                    <i class=" icon-bookmark-3"></i> {{ __('Excerpt') }}
+                                </h3>
                             <div class="panel-actions">
                                 <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
@@ -140,7 +143,9 @@
 
                     <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title">{{ __('voyager::post.additional_fields') }}</h3>
+                            <h3 class="panel-title">
+                                <i class="icon-plus"></i> {{ __('voyager::post.additional_fields') }}
+                            </h3>
                             <div class="panel-actions">
                                 <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
@@ -182,9 +187,11 @@
                 </div>
                 <div class="col-md-4">
                     <!-- ### DETAILS ### -->
-                    <div class="panel panel panel-bordered panel-warning">
+                    <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-clipboard"></i> {{ __('voyager::post.details') }}</h3>
+                            <h3 class="panel-title">
+                                <i class="icon-link-2"></i> {{ __('voyager::post.details') }}
+                            </h3>
                             <div class="panel-actions">
                                 <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
@@ -225,25 +232,33 @@
                     </div>
 
                     <!-- ### IMAGE ### -->
-                    <div class="panel panel-bordered panel-primary">
+                    <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-image"></i> {{ __('voyager::post.image') }}</h3>
+                            <h3 class="panel-title">
+                                <i class="icon-photo"></i> {{ __('voyager::post.image') }}
+                            </h3>
                             <div class="panel-actions">
                                 <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>
                         </div>
                         <div class="panel-body">
                             @if(isset($dataTypeContent->image))
-                                <img src="{{ filter_var($dataTypeContent->image, FILTER_VALIDATE_URL) ? $dataTypeContent->image : Voyager::image( $dataTypeContent->image ) }}" style="width:100%" />
+                            @php
+                                $imageParams = ["template" => "dynamic", "params" => "?w=400&h=225"]
+                            @endphp
+                                <img src="{{ filter_var($dataTypeContent->image, FILTER_VALIDATE_URL) ? $dataTypeContent->image : Voyager::image( $dataTypeContent->image, "", $imageParams ) }}" style="width:100%" />
                             @endif
                             <input type="file" name="image">
                         </div>
                     </div>
 
                     <!-- ### SEO CONTENT ### -->
-                    <div class="panel panel-bordered panel-info">
+                    <div class="panel">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="icon wb-search"></i> {{ __('voyager::post.seo_content') }}</h3>
+                            <h3 class="panel-title">
+                                <i class="icon-internet"></i> {{ __('voyager::post.seo_content') }}
+                                <span class="panel-desc"> {{ __('Make your post stand out on Google') }}</span>
+                            </h3>
                             <div class="panel-actions">
                                 <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
                             </div>

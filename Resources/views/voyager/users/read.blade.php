@@ -48,10 +48,10 @@
                                     @if(in_array($row->field, $allowedFields))
                                         <li class="list-separated-item">
                                             <div class="row">
-                                                <div class="col-xs-5 text-muted text-left" style="margin-bottom:0px;">
+                                                <div class="col-xs-5 text-muted">
                                                     {{ $row->display_name }} 
                                                 </div>
-                                                <div class="col-xs-7 text-right" style="margin-bottom:0px;">
+                                                <div class="col-xs-7 text-right">
                                                     @if($row->field == 'user_belongsto_role_relationship')
                                                         <b>{{$dataTypeContent->role->display_name }}</b>
                                                     @elseif($row->field == 'user_belongstomany_role_relationship')
@@ -61,9 +61,6 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            @if(!$loop->last)
-                                                <hr style="margin:0; margin-bottom: 5px; margin-top: 5px;">
-                                            @endif
                                         </li>
                                     @endif
                                 @endforeach
