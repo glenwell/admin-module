@@ -83,6 +83,9 @@ class InstallCommand extends \TCG\Voyager\Commands\InstallCommand
         $this->info('Adding the storage symlink to your public folder');
         $this->call('storage:link');
 
+        $this->info('Refresh config cache');
+        $this->call('config:cache');
+
         $this->info('Successfully installed Voyager! Enjoy');
     }
 

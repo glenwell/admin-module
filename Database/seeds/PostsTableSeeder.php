@@ -317,8 +317,8 @@ class PostsTableSeeder extends Seeder
         if (!$post->exists) {
             $post->fill([
                 'title'            => 'Lorem Ipsum Post',
-                'author_id'        => 0,
-                'seo_title'        => null,
+                'author_id'        => 1,
+                'seo_title'        => 'Lorem Ipsum Post',
                 'excerpt'          => 'This is the excerpt for the Lorem Ipsum Post',
                 'body'             => '<p>This is the body of the lorem ipsum post</p>',
                 'image'            => 'posts/post1.jpg',
@@ -334,8 +334,8 @@ class PostsTableSeeder extends Seeder
         if (!$post->exists) {
             $post->fill([
                 'title'     => 'My Sample Post',
-                'author_id' => 0,
-                'seo_title' => null,
+                'author_id' => 1,
+                'seo_title' => 'My Sample Post',
                 'excerpt'   => 'This is the excerpt for the sample Post',
                 'body'      => '<p>This is the body for the sample post, which includes the body.</p>
                 <h2>We can use all kinds of format!</h2>
@@ -354,14 +354,14 @@ class PostsTableSeeder extends Seeder
             $post->fill([
                 'title'            => 'Latest Post',
                 'author_id'        => 0,
-                'seo_title'        => null,
+                'seo_title'        => 'Latest Post',
                 'excerpt'          => 'This is the excerpt for the latest post',
                 'body'             => '<p>This is the body for the latest post</p>',
                 'image'            => 'posts/post3.jpg',
                 'slug'             => 'latest-post',
                 'meta_description' => 'This is the meta description',
                 'meta_keywords'    => 'keyword1, keyword2, keyword3',
-                'status'           => 'PUBLISHED',
+                'status'           => 'PENDING',
                 'featured'         => 0,
             ])->save();
         }
@@ -370,8 +370,8 @@ class PostsTableSeeder extends Seeder
         if (!$post->exists) {
             $post->fill([
                 'title'     => 'Yarr Post',
-                'author_id' => 0,
-                'seo_title' => null,
+                'author_id' => 1,
+                'seo_title' => 'Yarr SEO Post',
                 'excerpt'   => 'Reef sails nipperkin bring a spring upon her cable coffer jury mast spike marooned Pieces of Eight poop deck pillage. Clipper driver coxswain galleon hempen halter come about pressgang gangplank boatswain swing the lead. Nipperkin yard skysail swab lanyard Blimey bilge water ho quarter Buccaneer.',
                 'body'      => '<p>Swab deadlights Buccaneer fire ship square-rigged dance the hempen jig weigh anchor cackle fruit grog furl. Crack Jennys tea cup chase guns pressgang hearties spirits hogshead Gold Road six pounders fathom measured fer yer chains. Main sheet provost come about trysail barkadeer crimp scuttle mizzenmast brig plunder.</p>
 <p>Mizzen league keelhaul galleon tender cog chase Barbary Coast doubloon crack Jennys tea cup. Blow the man down lugsail fire ship pinnace cackle fruit line warp Admiral of the Black strike colors doubloon. Tackle Jack Ketch come about crimp rum draft scuppers run a shot across the bow haul wind maroon.</p>

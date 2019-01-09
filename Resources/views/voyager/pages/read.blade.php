@@ -54,36 +54,36 @@
                 <div class="panel">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            <i class="icon-link-2"></i> {{ __('Post Details') }}
+                            <i class="icon-link-2"></i> {{ __('Page Details') }}
                         </h3>
                         <div class="panel-actions">
-                            <a title="Open post in new page" class="panel-action icon-expand-4"></a>
+                            <a title="Open page in new page" class="panel-action icon-expand-4"></a>
                         </div>
                     </div>
                     <div class="panel-body">
                         <ul class="list-unstyled list-separated">
                             @php
-                                $postDetails = [
+                                $pageDetails = [
                                     [
                                         "name" => "Author",
                                         "data" => isset($dataTypeContent->authorId->name) ? $dataTypeContent->authorId->name : "None",
                                         "class" => null
                                     ],
-                                    [
+                                    /* [
                                         "name" => "Category",
                                         "data" => isset($dataTypeContent->category->name) ? $dataTypeContent->category->name : "None",
                                         "class" => null
-                                    ],
+                                    ], */
                                     [
                                         "name" => "Status",
                                         "data" => $dataTypeContent->status,
-                                        "class" => $dataTypeContent->status == "PUBLISHED" ? "text-success" : "text-danger"
+                                        "class" => $dataTypeContent->status == "ACTIVE" ? "text-success" : "text-danger"
                                     ],
-                                    [
+                                    /* [
                                         "name" => "Featured",
                                         "data" => $dataTypeContent->featured ? "YES" : "NO",
                                         "class" => null
-                                    ],
+                                    ], */
                                     [
                                         "name" => "Created",
                                         "data" => \Carbon\Carbon::parse($dataTypeContent->created_at)->format('M d, Y H:i'),
@@ -97,11 +97,11 @@
                                 ];
 
                                 $seoDetails = [
-                                    [
+                                    /* [
                                         "name" => "SEO Title",
                                         "data" => $dataTypeContent->seo_title,
                                         "class" => null
-                                    ],
+                                    ], */
                                     [
                                         "name" => "Slug",
                                         "data" => $dataTypeContent->slug,
@@ -120,7 +120,7 @@
                                 ];
                             @endphp
 
-                            @foreach ($postDetails as $detail)
+                            @foreach ($pageDetails as $detail)
                                 <li>
                                     <div class="row">
                                         <div class="col-xs-3 post-key">{{$detail["name"]}}</div>
