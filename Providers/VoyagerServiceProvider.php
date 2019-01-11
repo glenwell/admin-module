@@ -58,7 +58,7 @@ class VoyagerServiceProvider extends \TCG\Voyager\VoyagerServiceProvider
         $publishable = [
             'voyager_assets' => [
                 "{$publishablePath}/resources/assets/" => public_path(config('admin.voyager_assets_path')),
-                "{$publishablePath}/resources/views/voyager/" => resource_path(config('voyager.blade_path')),
+                /* "{$publishablePath}/resources/views/voyager/" => resource_path(config('voyager.blade_path')), */
             ],
             'seeds' => [
                 "{$publishablePath}/database/seeds/" => database_path('seeds'),

@@ -1,4 +1,4 @@
-@extends('voyager::master')
+@extends('admin::voyager.master')
 
 @section('page_title', __('voyager::generic.view').' '.$dataType->display_name_singular)
 

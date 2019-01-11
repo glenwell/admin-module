@@ -76,11 +76,18 @@ class AdminServiceProvider extends ServiceProvider
 
             $filename_pattern = '[ \w\\.\\/\\-\\@\(\)]+';
 
-            // route to access template applied image file
+            // Our own custom route for dynamic images
+            $app['router']->get(config('imagecache.dynamic_route').'/{template}/{params}/{filename}/{slug?}', [
+                'uses' => '\Modules\Admin\Http\Controllers\Intervention\ImageCacheController@getCustomImageResponse',
+                'as' => 'customimagecache'
+            ])->where(['filename' => $filename_pattern]);
+
+            // Override Interventions route to seal loopholes
             $app['router']->get(config('imagecache.route').'/{template}/{filename}', [
                 'uses' => '\Modules\Admin\Http\Controllers\Intervention\ImageCacheController@getResponse',
                 'as' => 'imagecache'
             ])->where(['filename' => $filename_pattern]);
+
         }
     }
 

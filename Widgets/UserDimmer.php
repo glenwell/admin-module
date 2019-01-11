@@ -25,7 +25,7 @@ class UserDimmer extends \TCG\Voyager\Widgets\UserDimmer
         $count = User::count();
         $string = trans_choice('voyager::dimmer.user', $count);
 
-        return view('voyager::dimmer', array_merge($this->config, [
+        return view('admin::voyager.dimmer', array_merge($this->config, [
             'icon'   => 'icon-user',
             'title'  => "{$count} {$string}",
             'text'   => __('voyager::dimmer.user_text', ['count' => $count, 'string' => Str::lower($string)]),

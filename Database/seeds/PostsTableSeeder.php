@@ -25,7 +25,7 @@ class PostsTableSeeder extends Seeder
                 'icon'                  => 'icon-article-2',
                 'model_name'            => 'Modules\\Admin\\Models\\Post',
                 'policy_name'           => 'Modules\\Admin\\Policies\\PostPolicy',
-                'controller'            => '',
+                'controller'            => '\Modules\Admin\Http\Controllers\Voyager\VoyagerBaseController',
                 'generate_permissions'  => 1,
                 'description'           => '',
             ])->save();
@@ -141,15 +141,7 @@ class PostsTableSeeder extends Seeder
                     ],
                     'quality'    => '70%',
                     'upsize'     => true,
-                    'thumbnails' => [
-                        [
-                            'name' => 'preview',
-                            'crop' => [
-                                'width'  => '100',
-                                'height' => '67',
-                            ],
-                        ],
-                    ],
+                    'preserveFileUploadName' => true
                 ],
                 'order' => 7,
             ])->save();

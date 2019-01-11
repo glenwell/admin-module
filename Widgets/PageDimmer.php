@@ -25,7 +25,7 @@ class PageDimmer extends \TCG\Voyager\Widgets\PageDimmer
         $count = Page::count();
         $string = trans_choice('voyager::dimmer.page', $count);
 
-        return view('voyager::dimmer', array_merge($this->config, [
+        return view('admin::voyager.dimmer', array_merge($this->config, [
             'icon'   => 'icon-book-3',
             'title'  => "{$count} {$string}",
             'text'   => __('voyager::dimmer.page_text', ['count' => $count, 'string' => Str::lower($string)]),

@@ -1,4 +1,4 @@
-@extends('voyager::master')
+@extends('admin::voyager.master')
 
 @section('page_title', __('voyager::generic.view').' '.$dataType->display_name_singular)
 
@@ -35,7 +35,7 @@
                 <div class="panel">
                     <div class="panel-body" style="padding:0">
                         @php
-                            $imageParams = ["template" => "dynamic", "params" => "?w=1280&h=500"]
+                            $imageParams = ["template" => "dynamic", "params" => ["w" => 1280, "h" => 500]]
                         @endphp
                         <img class="img-responsive img-rounded" src="{{ filter_var($dataTypeContent->image, FILTER_VALIDATE_URL) ? $dataTypeContent->image : Voyager::image($dataTypeContent->image, "", $imageParams) }}" alt="">
                         <div class="post-container">

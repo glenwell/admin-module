@@ -1,16 +1,20 @@
-@extends('voyager::master')
+@extends('admin::voyager.master')
 
 @section('page_title', __('voyager::generic.viewing').' '.$dataType->display_name_plural)
 
 @section('page_header')
-    <h1 class="page-title">
-        <i class="{{ $dataType->icon }}"></i> {{ $dataType->display_name_plural }}
-        @can('add',app($dataType->model_name))
-            <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success">
-                <i class="voyager-plus"></i> {{ __('voyager::generic.add_new') }}
-            </a>
-        @endcan
-    </h1>
+    <div class="container-fluid">
+        <h1 class="page-title" style="padding-left: 50px;">
+            <i class="{{ $dataType->icon }}" style="left: 0;"></i> {{ $dataType->display_name_plural }}
+        </h1>
+        <div class="pull-right" style="margin-top:30px;">
+            @can('add',app($dataType->model_name))
+                <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success">
+                    <i class="voyager-plus"></i> {{ __('voyager::generic.add_new') }}
+                </a>
+            @endcan
+        </div>
+    </div>
 @stop
 
 @section('content')
@@ -21,7 +25,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-bordered">
-                    <div class="panel-body">
+                    <div class="panel-body" style="padding: 50px 0px 20px;">
                         <table id="dataTable" class="table table-hover">
                             <thead>
                             <tr>

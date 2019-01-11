@@ -25,7 +25,7 @@ class PostDimmer extends \TCG\Voyager\Widgets\PostDimmer
         $count = Post::count();
         $string = trans_choice('voyager::dimmer.post', $count);
 
-        return view('voyager::dimmer', array_merge($this->config, [
+        return view('admin::voyager.dimmer', array_merge($this->config, [
             'icon'   => 'icon-article-2',
             'title'  => "{$count} {$string}",
             'text'   => __('voyager::dimmer.post_text', ['count' => $count, 'string' => Str::lower($string)]),

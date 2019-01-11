@@ -1,4 +1,4 @@
-@extends('voyager::master')
+@extends('admin::voyager.master')
 
 @section('page_title', __('voyager::generic.viewing').' '.$dataType->display_name_plural)
 
@@ -18,7 +18,7 @@
             @endcan
             @can('edit', app($dataType->model_name))
                 @if(isset($dataType->order_column) && isset($dataType->order_display_column))
-                    <a href="{{ route('voyager.'.$dataType->slug.'.order') }}" class="btn btn-primary">
+                    <a href="{{ route('voyager.'.$dataType->slug.'.order') }}" class="btn btn-info" style="margin-top: 2px;">
                         <i class="voyager-list"></i> <span>{{ __('voyager::bread.order') }}</span>
                     </a>
                 @endif
@@ -103,7 +103,7 @@
                                             
                                             <td>
                                                 @php
-                                                    $imageParams = ["template" => "dynamic", "params" => "?w=100&h=67"]
+                                                    $imageParams = ["template" => "dynamic", "params" => ["w" => 100, "h" => 67]]
                                                 @endphp
                                                 @if($row->type == 'image')
                                                     <img class="img-rounded" src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field}, "", $imageParams ) }}@else{{ $data->{$row->field} }}@endif" style="width:100px">

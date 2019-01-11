@@ -1,4 +1,4 @@
-@extends('voyager::master')
+@extends('admin::voyager.master')
 
 @section('page_title', __('voyager::generic.view').' '.$dataTypeContent->name."'s Profile")
 
@@ -36,7 +36,7 @@
                     <div class="panel-body" style="padding-top: 50px;">
                         <div class="text-center">
                             @php
-                                $imageParams = ["template" => "dynamic", "params" => "?w=120&h=120"];
+                                $imageParams = ["template" => "dynamic", "params" => ["w" => 120, "h" => 120]];
                                 $allowedFields = ["email", "created_at", "locale", "user_belongsto_role_relationship"]
                             @endphp
                             <img src="{{ filter_var($dataTypeContent->avatar, FILTER_VALIDATE_URL) ? $dataTypeContent->avatar : Voyager::image($dataTypeContent->avatar, "", $imageParams) }}" style="width:120px;height:120px;" class="avatar img-circle" alt="Admin avatar">

@@ -6,15 +6,16 @@ use Illuminate\Support\Facades\Storage;
 
 class Voyager extends \TCG\Voyager\Voyager
 {
-    public function image($file, $default = '', $type = '')
+    public function image($file, $default = '', $type = null)
     {
         if (!empty($file)) {
 
             if (!empty($type) && !is_array($type)) {
                 $file = $this->getThumbnail($file, $type);
             } elseif(is_array($type)) {
-                $tempUrl = str_replace('\\', '/', Storage::disk(config('voyager.storage.disk'))->url($file.$type['params']));
-                return str_replace('/storage/', '/'.config('imagecache.route').'/'.$type['template'].'/' , $tempUrl);
+                $tempUrl = str_replace('\\', '/', Storage::disk(config('voyager.storage.disk'))->url($file));
+                $pos = isset($type['params']['p']) ? '-p'.$type['params']['p'] : '';
+                return str_replace('/storage/', '/'.config('imagecache.dynamic_route').'/'.$type['template'].'/w'.$type['params']['w'].'-h'.$type['params']['h'].$pos.'/' , $tempUrl);
             }
 
             return str_replace('\\', '/', Storage::disk(config('voyager.storage.disk'))->url($file));

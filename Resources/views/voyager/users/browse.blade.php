@@ -1,4 +1,4 @@
-@extends('voyager::master')
+@extends('admin::voyager.master')
 
 @section('page_title', __('voyager::generic.viewing').' '.$dataType->display_name_plural)
 
@@ -103,7 +103,7 @@
                                             
                                             <td>
                                                 @php
-                                                    $imageParams = ["template" => "dynamic", "params" => "?w=50&h=50"]
+                                                    $imageParams = ["template" => "dynamic", "params" => ["w" => 50, "h" => 50]]
                                                 @endphp
                                                 @if($row->type == 'image')
                                                     <img class="img-rounded" src="@if( !filter_var($data->{$row->field}, FILTER_VALIDATE_URL)){{ Voyager::image( $data->{$row->field}, "", $imageParams ) }}@else{{ $data->{$row->field} }}@endif" style="width:50px">

@@ -8,6 +8,13 @@ use Intervention\Image\Image;
 
 abstract class BaseFilter implements FilterInterface
 {
+    private $params;
+
+    public function __construct($params = null)
+    {
+        $this->params = is_array($params) ? (object) $params : (object) [];
+    }
+
     public function dimensions(Image $image)
     {
         return (object) [
@@ -55,19 +62,6 @@ abstract class BaseFilter implements FilterInterface
     }
 
     /**
-     * Get image parameters from the URL
-     * Variables w = width, h = height, p = watermark position
-     * 
-     * @return object
-     */
-    private function getImageParameters()
-    {
-        return (object) array_filter(app('request')->all(), function($param) {
-            return in_array($param, ['w', 'h', 'p']);
-        }, ARRAY_FILTER_USE_KEY);
-    }
-
-    /**
      * Get the width and height of the image
      *
      * @param  \Intervention\Image\Image  $image
@@ -80,12 +74,12 @@ abstract class BaseFilter implements FilterInterface
         $method = $dimension == 'height' ? 'height' : 'width';
         
         //If width or height is set, proceed
-        if(isset($this->getImageParameters()->{$method[0]})) {
+        if(isset($this->params->{$method[0]})) {
             
-            $side = $this->getImageParameters()->{$method[0]};
+            $side = $this->params->{$method[0]};
             
             //Side must be numeric, not null, and less than original image dimension
-            if(is_numeric($side) && !is_null($side) && $side <= $image->{$method}()) {
+            if(is_numeric($side) && !is_null($side) && $side > 0 && $side <= $image->{$method}()) {
                 return $side;
             } else {
                 return $image->{$method}();
@@ -109,9 +103,9 @@ abstract class BaseFilter implements FilterInterface
             'bottom-right'
         ];
 
-        if(isset($this->getImageParameters()->p)) {
+        if(isset($this->params->p)) {
             
-            $position = $this->getImageParameters()->p;
+            $position = $this->params->p;
             
             //Position must be numeric, not null, and less than 8 elements in the options
             if(is_numeric($position) && !is_null($position) && ($position >= 0 && $position <= 8) ){

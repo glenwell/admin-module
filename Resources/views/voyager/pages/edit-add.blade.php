@@ -1,4 +1,4 @@
-@extends('voyager::master')
+@extends('admin::voyager.master')
 
 @section('page_title', __('voyager::generic.'.(isset($dataTypeContent->id) ? 'edit' : 'add')).' '.$dataType->display_name_singular)
 
@@ -243,7 +243,7 @@
                         <div class="panel-body">
                             @if(isset($dataTypeContent->image))
                             @php
-                                $imageParams = ["template" => "dynamic", "params" => "?w=400&h=225"]
+                                $imageParams = ["template" => "dynamic", "params" => ["w" => 400, "h" => 225]]
                             @endphp
                                 <img src="{{ filter_var($dataTypeContent->image, FILTER_VALIDATE_URL) ? $dataTypeContent->image : Voyager::image( $dataTypeContent->image, "", $imageParams ) }}" style="width:100%" />
                             @endif

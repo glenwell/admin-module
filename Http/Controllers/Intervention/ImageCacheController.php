@@ -12,6 +12,8 @@ class ImageCacheController extends \Intervention\Image\ImageCacheController
     /**
      * Get HTTP response of either original image file or
      * template applied file.
+     * 
+     * Overriden to prevent default intervention filters
      *
      * @param  string $template
      * @param  string $filename
@@ -20,6 +22,68 @@ class ImageCacheController extends \Intervention\Image\ImageCacheController
     public function getResponse($template, $filename)
     {
         return $this->getImage($template, $filename);
+    }
+
+    /**
+     * Modified getImage method to allow for image parameters
+     *
+     * @param  string $template
+     * @param  string $params
+     * @param  string $filename
+     * @return Illuminate\Http\Response
+     */
+    public function getCustomImageResponse($template, $params, $filename)
+    {
+        $template = $this->getTemplate($template);
+        $path = $this->getImagePath($filename);
+        $params = $this->getImageParameters($params);
+
+        // image manipulation based on callback
+        $manager = new ImageManager(Config::get('image'));
+        $content = $manager->cache(function ($image) use ($template, $path, $params) {
+
+            if ($template instanceof Closure) {
+                // build from closure callback template
+                $template($image->make($path));
+            } else {
+                // build from filter template
+                $image->make($path)->filter(new $template($params));
+            }
+            
+        }, config('imagecache.lifetime'));
+
+        return $this->buildResponse($content);
+    }
+
+    private function getImageParameters($params)
+    {
+        $filteredParams = [];
+
+        //If we are not requesting the original image...
+        if (is_string($params) && $params != "original") {
+            
+            $paramsArray = explode("-", $params);
+            
+            //We need at least two parameters to be present
+            if(count($paramsArray) > 1) {
+                
+                foreach ($paramsArray as $param) {
+                    //Only width, height, and watermark position allowed
+                    if(in_array($param[0], ["w", "h", "p"])) {
+                        
+                        $arr = str_split($param);
+                        //Remove first letter
+                        unset($arr[0]);
+                        
+                        $filteredParams[$param[0]] = intval( implode("",$arr));
+                    }
+                }
+
+                return $filteredParams;
+            }
+        }
+
+        return $filteredParams;
     }
 
     /**

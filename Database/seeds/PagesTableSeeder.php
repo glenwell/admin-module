@@ -26,7 +26,7 @@ class PagesTableSeeder extends Seeder
                 'display_name_plural'   => __('voyager::seeders.data_types.page.plural'),
                 'icon'                  => 'icon-book-3',
                 'model_name'            => 'Modules\\Admin\\Models\\Page',
-                'controller'            => '',
+                'controller'            => '\Modules\Admin\Http\Controllers\Voyager\VoyagerBaseController',
                 'generate_permissions'  => 1,
                 'description'           => '',
             ])->save();
@@ -232,15 +232,7 @@ class PagesTableSeeder extends Seeder
                     ],
                     'quality'    => '70%',
                     'upsize'     => true,
-                    'thumbnails' => [
-                        [
-                            'name' => 'preview',
-                            'crop' => [
-                                'width'  => '100',
-                                'height' => '67',
-                            ],
-                        ],
-                    ],
+                    'preserveFileUploadName' => true
                 ],
                 'order'        => 12,
             ])->save();
