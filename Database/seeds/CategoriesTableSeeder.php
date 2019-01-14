@@ -26,7 +26,7 @@ class CategoriesTableSeeder extends Seeder
                 'display_name_plural'   => __('voyager::seeders.data_types.category.plural'),
                 'icon'                  => 'icon-grid-squares-2',
                 'model_name'            => 'Modules\\Admin\\Models\\Category',
-                'controller'            => '',
+                'controller'            => '\Modules\Admin\Http\Controllers\Voyager\VoyagerBaseController',
                 'generate_permissions'  => 1,
                 'description'           => '',
             ])->save();

@@ -33,7 +33,7 @@ class DataTypesTableSeeder extends Seeder
                 'display_name_plural'   => __('voyager::seeders.data_types.menu.plural'),
                 'icon'                  => 'icon-hamburger-menu-1',
                 'model_name'            => 'TCG\\Voyager\\Models\\Menu',
-                'controller'            => '',
+                'controller'            => '\Modules\Admin\Http\Controllers\Voyager\VoyagerBaseController',
                 'generate_permissions'  => 1,
                 'description'           => '',
             ])->save();

@@ -35,6 +35,15 @@ return [
 
     'images' => [
 
+        // The default dimensions when an image is uploaded in the Tiny MCE uploader
+        'default_dimensions'   => [
+            "template" => "dynamic",
+            "params" => [
+                "w" => 1000,
+                "h" => 563
+            ]
+        ],
+
         'watermark' => [
 
             'enabled' => true,

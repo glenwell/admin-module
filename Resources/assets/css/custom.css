@@ -106,3 +106,73 @@ ul.list-separated > li:last-child {
 .post-body figcaption {
     text-align: center;
 }
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover{
+    background:#fff !important;
+    color:#62a8ea !important;
+    border-bottom:1px solid #fff !important;
+    top:-1px !important;
+}
+
+.nav-tabs > li a{
+    transition:all 0.3s ease;
+}
+
+.voyager .nav-tabs, .voyager .nav-tabs > li > a:hover {
+    background-color: unset;
+}
+
+.custom-pane {
+    padding: 0 !important;
+}
+
+.nav-tabs > li.active > a:focus{
+    top:0px !important;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+
+.panel .mce-panel {
+    border-left-color: #fff;
+    border-right-color: #fff;
+}
+
+.panel .mce-toolbar,
+.panel .mce-statusbar {
+    padding-left: 20px;
+}
+
+.panel .mce-edit-area,
+.panel .mce-edit-area iframe,
+.panel .mce-edit-area iframe html {
+    padding: 0 10px;
+    min-height: 350px;
+}
+
+.mce-content-body {
+    color: #555;
+    font-size: 14px;
+}
+
+.panel.is-fullscreen .mce-statusbar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 200000;
+}
+
+.panel.is-fullscreen .mce-tinymce {
+    height:100%;
+}
+
+.panel.is-fullscreen .mce-edit-area,
+.panel.is-fullscreen .mce-edit-area iframe,
+.panel.is-fullscreen .mce-edit-area iframe html {
+    height: 100%;
+    position: absolute;
+    width: 99%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    min-height: 100%;
+}

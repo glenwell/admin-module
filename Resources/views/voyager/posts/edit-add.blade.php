@@ -2,54 +2,6 @@
 
 @section('page_title', __('voyager::generic.'.(isset($dataTypeContent->id) ? 'edit' : 'add')).' '.$dataType->display_name_singular)
 
-@section('css')
-    <style>
-        .panel .mce-panel {
-            border-left-color: #fff;
-            border-right-color: #fff;
-        }
-
-        .panel .mce-toolbar,
-        .panel .mce-statusbar {
-            padding-left: 20px;
-        }
-
-        .panel .mce-edit-area,
-        .panel .mce-edit-area iframe,
-        .panel .mce-edit-area iframe html {
-            padding: 0 10px;
-            min-height: 350px;
-        }
-
-        .mce-content-body {
-            color: #555;
-            font-size: 14px;
-        }
-
-        .panel.is-fullscreen .mce-statusbar {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            z-index: 200000;
-        }
-
-        .panel.is-fullscreen .mce-tinymce {
-            height:100%;
-        }
-
-        .panel.is-fullscreen .mce-edit-area,
-        .panel.is-fullscreen .mce-edit-area iframe,
-        .panel.is-fullscreen .mce-edit-area iframe html {
-            height: 100%;
-            position: absolute;
-            width: 99%;
-            overflow-y: scroll;
-            overflow-x: hidden;
-            min-height: 100%;
-        }
-    </style>
-@stop
-
 @section('page_header')
     <h1 class="page-title">
         <i class="{{ $dataType->icon }}"></i>
@@ -68,7 +20,7 @@
             {{ csrf_field() }}
 
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <!-- ### TITLE ### -->
                     <div class="panel">
                         @if (count($errors) > 0)
@@ -94,7 +46,7 @@
                                 '_field_name'  => 'title',
                                 '_field_trans' => get_field_translations($dataTypeContent, 'title')
                             ])
-                            <input type="text" class="form-control" id="title" name="title" placeholder="{{ __('voyager::generic.title') }}" value="@if(isset($dataTypeContent->title)){{ $dataTypeContent->title }}@endif">
+                            <input type="text" class="form-control" id="title" data-toggle="tooltip" data-placement="top" title="A title for social media news feeds that captures attention." name="title" placeholder="{{ __('voyager::generic.title') }}" value="@if(isset($dataTypeContent->title)){{ $dataTypeContent->title }}@endif">
                         </div>
                     </div>
 
@@ -121,25 +73,6 @@
                             {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
                         </div>
                     </div><!-- .panel -->
-
-                    <!-- ### EXCERPT ### -->
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                    <i class=" icon-bookmark-3"></i> {{ __('Excerpt') }}
-                                </h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            @include('voyager::multilingual.input-hidden', [
-                                '_field_name'  => 'excerpt',
-                                '_field_trans' => get_field_translations($dataTypeContent, 'excerpt')
-                            ])
-                            <textarea class="form-control" name="excerpt">@if (isset($dataTypeContent->excerpt)){{ $dataTypeContent->excerpt }}@endif</textarea>
-                        </div>
-                    </div>
 
                     <div class="panel">
                         <div class="panel-heading">
@@ -185,108 +118,132 @@
                     </div>
 
                 </div>
-                <div class="col-md-4">
-                    <!-- ### DETAILS ### -->
+                <div class="col-md-3">
+                    <!-- ### SETTING SELECTOR ### -->
                     <div class="panel">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <i class="icon-link-2"></i> {{ __('voyager::post.details') }}
-                            </h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label for="slug">{{ __('voyager::post.slug') }}</label>
-                                @include('voyager::multilingual.input-hidden', [
-                                    '_field_name'  => 'slug',
-                                    '_field_trans' => get_field_translations($dataTypeContent, 'slug')
-                                ])
-                                <input type="text" class="form-control" id="slug" name="slug"
-                                    placeholder="slug"
-                                    {!! isFieldSlugAutoGenerator($dataType, $dataTypeContent, "slug") !!}
-                                    value="@if(isset($dataTypeContent->slug)){{ $dataTypeContent->slug }}@endif">
-                            </div>
-                            <div class="form-group">
-                                <label for="status">{{ __('voyager::post.status') }}</label>
-                                <select class="form-control" name="status">
-                                    <option value="PUBLISHED"@if(isset($dataTypeContent->status) && $dataTypeContent->status == 'PUBLISHED') selected="selected"@endif>{{ __('voyager::post.status_published') }}</option>
-                                    <option value="DRAFT"@if(isset($dataTypeContent->status) && $dataTypeContent->status == 'DRAFT') selected="selected"@endif>{{ __('voyager::post.status_draft') }}</option>
-                                    <option value="PENDING"@if(isset($dataTypeContent->status) && $dataTypeContent->status == 'PENDING') selected="selected"@endif>{{ __('voyager::post.status_pending') }}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="category_id">{{ __('voyager::post.category') }}</label>
-                                <select class="form-control" name="category_id">
-                                    @foreach(TCG\Voyager\Models\Category::all() as $category)
-                                        <option value="{{ $category->id }}"@if(isset($dataTypeContent->category_id) && $dataTypeContent->category_id == $category->id) selected="selected"@endif>{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="featured">{{ __('voyager::generic.featured') }}</label>
-                                <input type="checkbox" name="featured"@if(isset($dataTypeContent->featured) && $dataTypeContent->featured) checked="checked"@endif>
-                            </div>
+                        
+                        <div class="panel-body" style="padding:0 !important;">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#settings"><i class="icon-settings"></i> <strong>Settings</strong></a></li>
+                                <li><a data-toggle="tab" href="#seo"><i class="icon-search-stats-1"></i> <strong>SEO</strong></a></li>
+                              </ul>
                         </div>
                     </div>
 
-                    <!-- ### IMAGE ### -->
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <i class="icon-photo"></i> {{ __('voyager::post.image') }}
-                            </h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                    <div class="tab-content">
+                        <div id="settings" class="tab-pane custom-pane fade in active">
+                            <!-- ### DETAILS ### -->
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <i class="icon-link-2"></i> {{ __('voyager::post.details') }}
+                                    </h3>
+                                    <div class="panel-actions">
+                                        <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="slug">{{ __('voyager::post.slug') }}</label>
+                                        @include('voyager::multilingual.input-hidden', [
+                                            '_field_name'  => 'slug',
+                                            '_field_trans' => get_field_translations($dataTypeContent, 'slug')
+                                        ])
+                                        <input type="text" class="form-control" id="slug" name="slug" data-toggle="tooltip" data-placement="top" title="The final URL will include this slug for better SEO."
+                                            placeholder="slug"
+                                            {!! isFieldSlugAutoGenerator($dataType, $dataTypeContent, "slug") !!}
+                                            value="@if(isset($dataTypeContent->slug)){{ $dataTypeContent->slug }}@endif">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status">{{ __('voyager::post.status') }}</label>
+                                        <select class="form-control" name="status">
+                                            <option value="PUBLISHED"@if(isset($dataTypeContent->status) && $dataTypeContent->status == 'PUBLISHED') selected="selected"@endif>{{ __('PUBLISHED') }}</option>
+                                            <option value="DRAFT"@if(isset($dataTypeContent->status) && $dataTypeContent->status == 'DRAFT') selected="selected"@endif>{{ __('DRAFT') }}</option>
+                                            <option value="PENDING"@if(isset($dataTypeContent->status) && $dataTypeContent->status == 'PENDING') selected="selected"@endif>{{ __('PENDING') }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="category_id">{{ __('voyager::post.category') }}</label>
+                                        <select class="form-control" name="category_id">
+                                            @foreach(TCG\Voyager\Models\Category::all() as $category)
+                                                <option value="{{ $category->id }}"@if(isset($dataTypeContent->category_id) && $dataTypeContent->category_id == $category->id) selected="selected"@endif>{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="excerpt">{{ __('Excerpt') }}</label>
+                                        @include('voyager::multilingual.input-hidden', [
+                                            '_field_name'  => 'excerpt',
+                                            '_field_trans' => get_field_translations($dataTypeContent, 'excerpt')
+                                        ])
+                                        <textarea class="form-control" name="excerpt" data-toggle="tooltip" data-placement="top" title="A snippet of your post.">@if (isset($dataTypeContent->excerpt)){{ $dataTypeContent->excerpt }}@endif</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="featured">{{ __('voyager::generic.featured') }}</label>
+                                        <input type="checkbox" name="featured"@if(isset($dataTypeContent->featured) && $dataTypeContent->featured) checked="checked"@endif>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="panel-body">
-                            @if(isset($dataTypeContent->image))
-                            @php
-                                $imageParams = ["template" => "dynamic", "params" => ["w" => 400, "h" => 225]]
-                            @endphp
-                                <img src="{{ filter_var($dataTypeContent->image, FILTER_VALIDATE_URL) ? $dataTypeContent->image : Voyager::image( $dataTypeContent->image, "", $imageParams ) }}" style="width:100%" />
-                            @endif
-                            <input type="file" name="image">
-                        </div>
-                    </div>
 
-                    <!-- ### SEO CONTENT ### -->
-                    <div class="panel">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <i class="icon-internet"></i> {{ __('voyager::post.seo_content') }}
-                                <span class="panel-desc"> {{ __('Make your post stand out on Google') }}</span>
-                            </h3>
-                            <div class="panel-actions">
-                                <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                            <!-- ### IMAGE ### -->
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <i class="icon-photo"></i> {{ __('voyager::post.image') }}
+                                    </h3>
+                                    <div class="panel-actions">
+                                        <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    @if(isset($dataTypeContent->image))
+                                    @php
+                                        $imageParams = ["template" => "dynamic", "params" => ["w" => 320, "h" => 180]]
+                                    @endphp
+                                        <img src="{{ filter_var($dataTypeContent->image, FILTER_VALIDATE_URL) ? $dataTypeContent->image : Voyager::image( $dataTypeContent->image, "", $imageParams ) }}" style="width:100%" />
+                                    @endif
+                                    <input type="file" name="image">
+                                </div>
                             </div>
                         </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <label for="seo_title">{{ __('voyager::post.seo_title') }}</label>
-                                @include('voyager::multilingual.input-hidden', [
-                                    '_field_name'  => 'seo_title',
-                                    '_field_trans' => get_field_translations($dataTypeContent, 'seo_title')
-                                ])
-                                <input type="text" class="form-control" name="seo_title" placeholder="SEO Title" value="@if(isset($dataTypeContent->seo_title)){{ $dataTypeContent->seo_title }}@endif">
-                            </div>
-                            <div class="form-group">
-                                <label for="meta_description">{{ __('voyager::post.meta_description') }}</label>
-                                @include('voyager::multilingual.input-hidden', [
-                                    '_field_name'  => 'meta_description',
-                                    '_field_trans' => get_field_translations($dataTypeContent, 'meta_description')
-                                ])
-                                <textarea class="form-control" name="meta_description">@if(isset($dataTypeContent->meta_description)){{ $dataTypeContent->meta_description }}@endif</textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="meta_keywords">{{ __('voyager::post.meta_keywords') }}</label>
-                                @include('voyager::multilingual.input-hidden', [
-                                    '_field_name'  => 'meta_keywords',
-                                    '_field_trans' => get_field_translations($dataTypeContent, 'meta_keywords')
-                                ])
-                                <textarea class="form-control" name="meta_keywords">@if(isset($dataTypeContent->meta_keywords)){{ $dataTypeContent->meta_keywords }}@endif</textarea>
+                        <div id="seo" class="tab-pane custom-pane fade">
+                            <!-- ### SEO CONTENT ### -->
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">
+                                        <i class="icon-internet"></i> {{ __('voyager::post.seo_content') }}
+                                        <span class="panel-desc"> {{ __('Make your post stand out on Google') }}</span>
+                                    </h3>
+                                    <div class="panel-actions">
+                                        <a class="panel-action voyager-angle-down" data-toggle="panel-collapse" aria-hidden="true"></a>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="seo_title">{{ __('voyager::post.seo_title') }}</label>
+                                        @include('voyager::multilingual.input-hidden', [
+                                            '_field_name'  => 'seo_title',
+                                            '_field_trans' => get_field_translations($dataTypeContent, 'seo_title')
+                                        ])
+                                        <input type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="A search engine - Friendly title that matches search terms of users." name="seo_title" placeholder="SEO Title" value="@if(isset($dataTypeContent->seo_title)){{ $dataTypeContent->seo_title }}@endif">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="meta_description">{{ __('voyager::post.meta_description') }}</label>
+                                        @include('voyager::multilingual.input-hidden', [
+                                            '_field_name'  => 'meta_description',
+                                            '_field_trans' => get_field_translations($dataTypeContent, 'meta_description')
+                                        ])
+                                        <textarea class="form-control" name="meta_description">@if(isset($dataTypeContent->meta_description)){{ $dataTypeContent->meta_description }}@endif</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="meta_keywords">{{ __('voyager::post.meta_keywords') }}</label>
+                                        @include('voyager::multilingual.input-hidden', [
+                                            '_field_name'  => 'meta_keywords',
+                                            '_field_trans' => get_field_translations($dataTypeContent, 'meta_keywords')
+                                        ])
+                                        <textarea class="form-control" name="meta_keywords">@if(isset($dataTypeContent->meta_keywords)){{ $dataTypeContent->meta_keywords }}@endif</textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

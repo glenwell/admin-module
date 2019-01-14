@@ -74,6 +74,14 @@ class PostsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 0,
+                'details'      => [
+                    'validation' => [
+                      'rule' => 'required',
+                        'messages' => [
+                            'required' => 'Select a category for your post. If none exists, create one first.'
+                        ],
+                    ],
+                ],
                 'order'        => 3,
             ])->save();
         }
@@ -89,6 +97,15 @@ class PostsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
+                'details'      => [
+                    'validation' => [
+                      'rule' => 'required|max:60',
+                        'messages' => [
+                            'required' => 'A title is required for this post.',
+                            'max' => 'Ensure your title is less than :max characters.',
+                        ],
+                    ],
+                ],
                 'order'        => 4,
             ])->save();
         }
@@ -104,6 +121,14 @@ class PostsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
+                'details'      => [
+                    'validation' => [
+                      'rule' => 'max:350',
+                      'messages' => [
+                        'max' => 'Ensure your Excerpt is less than :max characters.',
+                      ],
+                    ],
+                ],
                 'order'        => 5,
             ])->save();
         }
@@ -119,6 +144,14 @@ class PostsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
+                'details'      => [
+                    'validation' => [
+                      'rule' => 'required',
+                      'messages' => [
+                        'required' => 'The body of the post is required.',
+                      ],
+                    ],
+                ],
                 'order'        => 6,
             ])->save();
         }
@@ -135,6 +168,12 @@ class PostsTableSeeder extends Seeder
                 'add'          => 1,
                 'delete'       => 1,
                 'details'      => [
+                    /* 'validation' => [
+                        'rule' => 'dimensions:min_width=1280,min_height=720',
+                        'messages' => [
+                            'dimensions' => 'Upload an image that is at least :min_width pixels in width and :min_height pixels in height.',
+                        ],
+                    ], */
                     'resize' => [
                         'width'  => '1280',
                         'height' => '720',
@@ -182,6 +221,14 @@ class PostsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
+                'description'  => [
+                    'validation' => [
+                          'rule' => 'max:140',
+                          'messages' => [
+                            'max' => 'Ensure your Meta Description is less than :max characters for best SEO results.',
+                          ],
+                    ],
+                ],
                 'order'        => 9,
             ])->save();
         }
@@ -215,9 +262,9 @@ class PostsTableSeeder extends Seeder
                 'details'      => [
                     'default' => 'DRAFT',
                     'options' => [
-                        'PUBLISHED' => 'published',
-                        'DRAFT'     => 'draft',
-                        'PENDING'   => 'pending',
+                        'PUBLISHED' => 'Published',
+                        'DRAFT'     => 'Draft',
+                        'PENDING'   => 'Pending',
                     ],
                 ],
                 'order' => 11,
@@ -265,6 +312,15 @@ class PostsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
+                'details'      => [
+                    'validation' => [
+                      'rule' => 'max:55',
+                      'messages' => 
+                      [
+                        'max' => 'Ensure your SEO title is less than :max characters for best results.',
+                      ],
+                    ],
+                ],
                 'order'        => 14,
             ])->save();
         }

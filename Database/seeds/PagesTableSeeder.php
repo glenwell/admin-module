@@ -75,6 +75,15 @@ class PagesTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
+                'details'      => [
+                    'validation' => [
+                      'rule' => 'required|max:60',
+                        'messages' => [
+                            'required' => 'A title is required for this post.',
+                            'max' => 'Ensure your title is less than :max characters.',
+                        ],
+                    ],
+                ],
                 'order'        => 3,
             ])->save();
         }
@@ -90,6 +99,14 @@ class PagesTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
+                'details'      => [
+                    'validation' => [
+                      'rule' => 'max:350',
+                      'messages' => [
+                        'max' => 'Ensure your Excerpt is less than :max characters.',
+                      ],
+                    ],
+                ],
                 'order'        => 4,
             ])->save();
         }
@@ -105,6 +122,14 @@ class PagesTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
+                'details'      => [
+                    'validation' => [
+                      'rule' => 'required',
+                      'messages' => [
+                        'required' => 'The body of the post is required.',
+                      ],
+                    ],
+                ],
                 'order'        => 5,
             ])->save();
         }
@@ -143,6 +168,14 @@ class PagesTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
+                'description'  => [
+                    'validation' => [
+                          'rule' => 'max:140',
+                          'messages' => [
+                            'max' => 'Ensure your Meta Description is less than :max characters for best SEO results.',
+                          ],
+                    ],
+                ],
                 'order'        => 7,
             ])->save();
         }
