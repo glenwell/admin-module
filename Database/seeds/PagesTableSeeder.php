@@ -168,7 +168,7 @@ class PagesTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'description'  => [
+                'details'  => [
                     'validation' => [
                           'rule' => 'max:140',
                           'messages' => [
@@ -180,11 +180,11 @@ class PagesTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($pageDataType, 'meta_keywords');
+        $dataRow = $this->dataRow($pageDataType, 'focus_keywords');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => __('voyager::seeders.data_rows.meta_keywords'),
+                'display_name' => __('Focus Keywords'),
                 'required'     => 1,
                 'browse'       => 0,
                 'read'         => 1,
@@ -271,6 +271,21 @@ class PagesTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($pageDataType, 'image_meta');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => __('Image Metadata'),
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 0,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 13,
+            ])->save();
+        }
+
         //Menu Item
         $menu = Menu::where('name', 'admin')->firstOrFail();
         $menuItem = MenuItem::firstOrNew([
@@ -304,7 +319,7 @@ class PagesTableSeeder extends Seeder
 <p>Ballast spirits fluke topmast me quarterdeck schooner landlubber or just lubber gabion belaying pin. Pinnace stern galleon starboard warp carouser to go on account dance the hempen jig jolly boat measured fer yer chains. Man-of-war fire in the hole nipperkin handsomely doubloon barkadeer Brethren of the Coast gibbet driver squiffy.</p>',
                 'image'            => 'pages/page1.jpg',
                 'meta_description' => 'Yar Meta Description',
-                'meta_keywords'    => 'Keyword1, Keyword2',
+                'focus_keywords'    => 'Keyword1, Keyword2',
                 'status'           => 'ACTIVE',
             ])->save();
         }

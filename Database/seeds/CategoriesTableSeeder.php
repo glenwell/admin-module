@@ -107,6 +107,60 @@ class CategoriesTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($categoryDataType, 'body');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'rich_text_box',
+                'display_name' => __('Snippet'),
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 5,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($categoryDataType, 'image');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'image',
+                'display_name' => __('Category Image'),
+                'required'     => 0,
+                'browse'       => 1,
+                'read'         => 1,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'details'      => [
+                    'resize' => [
+                        'width'  => '1280',
+                        'height' => '720',
+                    ],
+                    'quality'    => '70%',
+                    'upsize'     => true,
+                    'preserveFileUploadName' => true
+                ],
+                'order'        => 6,
+            ])->save();
+        }
+
+        $dataRow = $this->dataRow($categoryDataType, 'image_meta');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => __('Image Metadata'),
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 0,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 7,
+            ])->save();
+        }
+
         $dataRow = $this->dataRow($categoryDataType, 'slug');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -123,7 +177,7 @@ class CategoriesTableSeeder extends Seeder
                         'origin' => 'name',
                     ],
                 ],
-                'order' => 5,
+                'order' => 8,
             ])->save();
         }
 
@@ -138,7 +192,7 @@ class CategoriesTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'order'        => 6,
+                'order'        => 9,
             ])->save();
         }
 
@@ -153,7 +207,7 @@ class CategoriesTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'order'        => 7,
+                'order'        => 10,
             ])->save();
         }
 

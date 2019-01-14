@@ -186,6 +186,21 @@ class PostsTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataRow = $this->dataRow($postDataType, 'image_meta');
+        if (!$dataRow->exists) {
+            $dataRow->fill([
+                'type'         => 'text',
+                'display_name' => __('Image Metadata'),
+                'required'     => 0,
+                'browse'       => 0,
+                'read'         => 0,
+                'edit'         => 1,
+                'add'          => 1,
+                'delete'       => 1,
+                'order'        => 8,
+            ])->save();
+        }
+
         $dataRow = $this->dataRow($postDataType, 'slug');
         if (!$dataRow->exists) {
             $dataRow->fill([
@@ -206,7 +221,7 @@ class PostsTableSeeder extends Seeder
                         'rule'  => 'unique:posts,slug',
                     ],
                 ],
-                'order' => 8,
+                'order' => 9,
             ])->save();
         }
 
@@ -221,7 +236,7 @@ class PostsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'description'  => [
+                'details'  => [
                     'validation' => [
                           'rule' => 'max:140',
                           'messages' => [
@@ -229,22 +244,22 @@ class PostsTableSeeder extends Seeder
                           ],
                     ],
                 ],
-                'order'        => 9,
+                'order'        => 10,
             ])->save();
         }
 
-        $dataRow = $this->dataRow($postDataType, 'meta_keywords');
+        $dataRow = $this->dataRow($postDataType, 'focus_keywords');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text_area',
-                'display_name' => __('voyager::seeders.data_rows.meta_keywords'),
-                'required'     => 1,
+                'display_name' => __('Focus Keywords'),
+                'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'order'        => 10,
+                'order'        => 11,
             ])->save();
         }
 
@@ -267,7 +282,7 @@ class PostsTableSeeder extends Seeder
                         'PENDING'   => 'Pending',
                     ],
                 ],
-                'order' => 11,
+                'order' => 12,
             ])->save();
         }
 
@@ -282,7 +297,7 @@ class PostsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'order'        => 12,
+                'order'        => 13,
             ])->save();
         }
 
@@ -297,7 +312,7 @@ class PostsTableSeeder extends Seeder
                 'edit'         => 0,
                 'add'          => 0,
                 'delete'       => 0,
-                'order'        => 13,
+                'order'        => 14,
             ])->save();
         }
 
@@ -321,7 +336,7 @@ class PostsTableSeeder extends Seeder
                       ],
                     ],
                 ],
-                'order'        => 14,
+                'order'        => 15,
             ])->save();
         }
         $dataRow = $this->dataRow($postDataType, 'featured');
@@ -335,7 +350,7 @@ class PostsTableSeeder extends Seeder
                 'edit'         => 1,
                 'add'          => 1,
                 'delete'       => 1,
-                'order'        => 15,
+                'order'        => 16,
             ])->save();
         }
 
@@ -372,7 +387,7 @@ class PostsTableSeeder extends Seeder
                 'image'            => 'posts/post1.jpg',
                 'slug'             => 'lorem-ipsum-post',
                 'meta_description' => 'This is the meta description',
-                'meta_keywords'    => 'keyword1, keyword2, keyword3',
+                'focus_keywords'    => 'keyword1, keyword2, keyword3',
                 'status'           => 'PUBLISHED',
                 'featured'         => 0,
             ])->save();
@@ -391,7 +406,7 @@ class PostsTableSeeder extends Seeder
                 'image'            => 'posts/post2.jpg',
                 'slug'             => 'my-sample-post',
                 'meta_description' => 'Meta Description for sample post',
-                'meta_keywords'    => 'keyword1, keyword2, keyword3',
+                'focus_keywords'    => 'keyword1, keyword2, keyword3',
                 'status'           => 'PUBLISHED',
                 'featured'         => 0,
             ])->save();
@@ -408,7 +423,7 @@ class PostsTableSeeder extends Seeder
                 'image'            => 'posts/post3.jpg',
                 'slug'             => 'latest-post',
                 'meta_description' => 'This is the meta description',
-                'meta_keywords'    => 'keyword1, keyword2, keyword3',
+                'focus_keywords'    => 'keyword1, keyword2, keyword3',
                 'status'           => 'PENDING',
                 'featured'         => 0,
             ])->save();
@@ -427,7 +442,7 @@ class PostsTableSeeder extends Seeder
                 'image'            => 'posts/post4.jpg',
                 'slug'             => 'yarr-post',
                 'meta_description' => 'this be a meta descript',
-                'meta_keywords'    => 'keyword1, keyword2, keyword3',
+                'focus_keywords'    => 'keyword1, keyword2, keyword3',
                 'status'           => 'PUBLISHED',
                 'featured'         => 0,
             ])->save();

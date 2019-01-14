@@ -37,9 +37,9 @@ class VoyagerDummyServiceProvider extends ServiceProvider
                 "{$publishablePath}/config/imagecache.php" => config_path('imagecache.php'),
                 "{$publishablePath}/config/config.php" => config_path('admin.php'),
             ],
-            'dummy_migrations' => [
+            /* 'dummy_migrations' => [
                 "{$publishablePath}/database/migrations/" => database_path('migrations'),
-            ],
+            ], */
 
         ];
 

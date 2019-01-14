@@ -114,7 +114,7 @@
                                     ],
                                     [
                                         "name" => "Meta Keywords",
-                                        "data" => $dataTypeContent->meta_keywords,
+                                        "data" => $dataTypeContent->focus_keywords,
                                         "class" => null
                                     ],
                                 ];

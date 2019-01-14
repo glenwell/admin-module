@@ -86,7 +86,7 @@
                         <div class="panel-body">
                             @php
                                 $dataTypeRows = $dataType->{(isset($dataTypeContent->id) ? 'editRows' : 'addRows' )};
-                                $exclude = ['title', 'body', 'excerpt', 'slug', 'status', 'category_id', 'author_id', 'featured', 'image', 'meta_description', 'meta_keywords', 'seo_title'];
+                                $exclude = ['title', 'body', 'excerpt', 'slug', 'status', 'category_id', 'author_id', 'featured', 'image', 'image_meta', 'meta_description', 'focus_keywords', 'seo_title'];
                             @endphp
 
                             @foreach($dataTypeRows as $row)
@@ -203,6 +203,25 @@
                                         <img src="{{ filter_var($dataTypeContent->image, FILTER_VALIDATE_URL) ? $dataTypeContent->image : Voyager::image( $dataTypeContent->image, "", $imageParams ) }}" style="width:100%" />
                                     @endif
                                     <input type="file" name="image">
+                                    <script>
+                                        function updateImageMeta() {
+                                            var imageMetaData = {
+                                                'caption' : $('#image_caption').val(),
+                                                'alt' : $('#image_alt').val(),
+                                            };
+                                            
+                                            $('#image_meta').val(JSON.stringify(imageMetaData));
+                                        }
+                                    </script>
+                                    <div class="form-group">
+                                        <label for="image_alt">{{ __('Alternative Text') }}</label>
+                                        <input class="form-control" data-toggle="tooltip" data-placement="top" title="Alternative text to show in case image fails to load." onkeyup="updateImageMeta();" onkeydown="updateImageMeta();" onchange="updateImageMeta();" id="image_alt" value="@if(isset($dataTypeContent->image_meta) && json_decode($dataTypeContent->image_meta)){{ json_decode($dataTypeContent->image_meta)->alt }}@endif">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="image_caption">{{ __('Caption') }}</label>
+                                        <textarea class="form-control" data-toggle="tooltip" data-placement="top" title="Caption of the image" onkeyup="updateImageMeta();" onkeydown="updateImageMeta();" onchange="updateImageMeta();" id="image_caption">@if(isset($dataTypeContent->image_meta) && json_decode($dataTypeContent->image_meta)){{ json_decode($dataTypeContent->image_meta)->caption }}@endif</textarea>
+                                    </div>
+                                    <input id="image_meta" type="hidden" name="image_meta">
                                 </div>
                             </div>
                         </div>
@@ -233,15 +252,11 @@
                                             '_field_name'  => 'meta_description',
                                             '_field_trans' => get_field_translations($dataTypeContent, 'meta_description')
                                         ])
-                                        <textarea class="form-control" name="meta_description">@if(isset($dataTypeContent->meta_description)){{ $dataTypeContent->meta_description }}@endif</textarea>
+                                        <textarea class="form-control" name="meta_description" data-toggle="tooltip" data-placement="top" title="Make search engines find your content easily with the meta description.">@if(isset($dataTypeContent->meta_description)){{ $dataTypeContent->meta_description }}@endif</textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="meta_keywords">{{ __('voyager::post.meta_keywords') }}</label>
-                                        @include('voyager::multilingual.input-hidden', [
-                                            '_field_name'  => 'meta_keywords',
-                                            '_field_trans' => get_field_translations($dataTypeContent, 'meta_keywords')
-                                        ])
-                                        <textarea class="form-control" name="meta_keywords">@if(isset($dataTypeContent->meta_keywords)){{ $dataTypeContent->meta_keywords }}@endif</textarea>
+                                        <label for="focus_keywords">{{ __('Focus Keywords') }}</label>
+                                        <textarea class="form-control" name="focus_keywords">@if(isset($dataTypeContent->focus_keywords)){{ $dataTypeContent->focus_keywords }}@endif</textarea>
                                     </div>
                                 </div>
                             </div>

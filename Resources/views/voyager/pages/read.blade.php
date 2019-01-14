@@ -113,8 +113,8 @@
                                         "class" => $dataTypeContent->status == "PUBLISHED" ? "text-success" : "text-danger"
                                     ],
                                     [
-                                        "name" => "Meta Keywords",
-                                        "data" => $dataTypeContent->meta_keywords,
+                                        "name" => "Focus Keywords",
+                                        "data" => $dataTypeContent->focus_keywords,
                                         "class" => null
                                     ],
                                 ];
