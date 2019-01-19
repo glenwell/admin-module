@@ -3,11 +3,14 @@
 @section('page_title', __('voyager::generic.'.(isset($dataTypeContent->id) ? 'edit' : 'add')).' '.$dataType->display_name_singular)
 
 @section('page_header')
-    <h1 class="page-title">
-        <i class="{{ $dataType->icon }}"></i>
-        {{ __('voyager::generic.'.(isset($dataTypeContent->id) ? 'edit' : 'add')).' '.$dataType->display_name_singular }}
-    </h1>
-    @include('voyager::multilingual.language-selector')
+    <div class="container-fluid">
+        <h1 class="page-title" style="padding-left: 50px;">
+            <i class="{{ $dataType->icon }}" style="left: 0;"></i> 
+            {{ __('voyager::generic.'.(isset($dataTypeContent->id) ? 'edit' : 'add')).' '.$dataType->display_name_singular }}
+        </h1>
+        @include('admin::voyager.posts.seo.highlight')
+        @include('voyager::multilingual.language-selector')
+    </div>
 @stop
 
 @section('content')
@@ -241,14 +244,17 @@
                                             '_field_name'  => 'meta_description',
                                             '_field_trans' => get_field_translations($dataTypeContent, 'meta_description')
                                         ])
-                                        <textarea class="form-control" name="meta_description" data-toggle="tooltip" data-placement="top" title="Make search engines find your content easily with the meta description.">@if(isset($dataTypeContent->meta_description)){{ $dataTypeContent->meta_description }}@endif</textarea>
+                                        <textarea class="form-control" id="meta_description" name="meta_description" data-toggle="tooltip" data-placement="top" title="Make search engines find your content easily with the meta description.">@if(isset($dataTypeContent->meta_description)){{ $dataTypeContent->meta_description }}@endif</textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="focus_keywords">{{ __('Focus Keywords') }}</label>
-                                        <textarea class="form-control" name="focus_keywords">@if(isset($dataTypeContent->focus_keywords)){{ $dataTypeContent->focus_keywords }}@endif</textarea>
+                                        <textarea class="form-control" id="focus_keywords" name="focus_keywords">@if(isset($dataTypeContent->focus_keywords)){{ $dataTypeContent->focus_keywords }}@endif</textarea>
+                                        <input type="hidden" id="seo_title" value="">
                                     </div>
                                 </div>
                             </div>
+                            <!-- ### SEO ANALYSIS ### -->
+                            @include('admin::voyager.posts.seo.panel')
                         </div>
                     </div>
                 </div>
@@ -326,6 +332,14 @@
                 $('#confirm_delete_modal').modal('hide');
            });
            $('[data-toggle="tooltip"]').tooltip();
+
+           @if(true)
+                //Populate SEO fields
+                populateFields();
+                $(".form-edit-add").on("load change keyup cut paste", function() {
+                    populateFormStats();
+                });
+            @endif
         });
     </script>
 @stop

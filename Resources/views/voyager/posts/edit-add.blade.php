@@ -3,11 +3,14 @@
 @section('page_title', __('voyager::generic.'.(isset($dataTypeContent->id) ? 'edit' : 'add')).' '.$dataType->display_name_singular)
 
 @section('page_header')
-    <h1 class="page-title">
-        <i class="{{ $dataType->icon }}"></i>
-        {{ __('voyager::generic.'.(isset($dataTypeContent->id) ? 'edit' : 'add')).' '.$dataType->display_name_singular }}
-    </h1>
-    @include('voyager::multilingual.language-selector')
+    <div class="container-fluid">
+        <h1 class="page-title" style="padding-left: 50px;">
+            <i class="{{ $dataType->icon }}" style="left: 0;"></i> 
+            {{ __('voyager::generic.'.(isset($dataTypeContent->id) ? 'edit' : 'add')).' '.$dataType->display_name_singular }}
+        </h1>
+        @include('admin::voyager.posts.seo.highlight')
+        @include('voyager::multilingual.language-selector')
+    </div>
 @stop
 
 @section('content')
@@ -221,7 +224,7 @@
                                         <label for="image_caption">{{ __('Caption') }}</label>
                                         <textarea class="form-control" data-toggle="tooltip" data-placement="top" title="Caption of the image" onkeyup="updateImageMeta();" onkeydown="updateImageMeta();" onchange="updateImageMeta();" id="image_caption">@if(isset($dataTypeContent->image_meta) && json_decode($dataTypeContent->image_meta)){{ json_decode($dataTypeContent->image_meta)->caption }}@endif</textarea>
                                     </div>
-                                    <input id="image_meta" type="hidden" name="image_meta">
+                                    <input id="image_meta" value="@if(isset($dataTypeContent->image_meta)){{ $dataTypeContent->image_meta }}@endif" type="hidden" name="image_meta">
                                 </div>
                             </div>
                         </div>
@@ -244,7 +247,7 @@
                                             '_field_name'  => 'seo_title',
                                             '_field_trans' => get_field_translations($dataTypeContent, 'seo_title')
                                         ])
-                                        <input type="text" class="form-control" data-toggle="tooltip" data-placement="top" title="A search engine - Friendly title that matches search terms of users." name="seo_title" placeholder="SEO Title" value="@if(isset($dataTypeContent->seo_title)){{ $dataTypeContent->seo_title }}@endif">
+                                        <input type="text" id="seo_title" class="form-control" data-toggle="tooltip" data-placement="top" title="A search engine - Friendly title that matches search terms of users." name="seo_title" placeholder="SEO Title" value="@if(isset($dataTypeContent->seo_title)){{ $dataTypeContent->seo_title }}@endif">
                                     </div>
                                     <div class="form-group">
                                         <label for="meta_description">{{ __('voyager::post.meta_description') }}</label>
@@ -252,14 +255,16 @@
                                             '_field_name'  => 'meta_description',
                                             '_field_trans' => get_field_translations($dataTypeContent, 'meta_description')
                                         ])
-                                        <textarea class="form-control" name="meta_description" data-toggle="tooltip" data-placement="top" title="Make search engines find your content easily with the meta description.">@if(isset($dataTypeContent->meta_description)){{ $dataTypeContent->meta_description }}@endif</textarea>
+                                        <textarea class="form-control" id="meta_description" name="meta_description" data-toggle="tooltip" data-placement="top" title="Make search engines find your content easily with the meta description.">@if(isset($dataTypeContent->meta_description)){{ $dataTypeContent->meta_description }}@endif</textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="focus_keywords">{{ __('Focus Keywords') }}</label>
-                                        <textarea class="form-control" name="focus_keywords">@if(isset($dataTypeContent->focus_keywords)){{ $dataTypeContent->focus_keywords }}@endif</textarea>
+                                        <textarea class="form-control" id="focus_keywords" name="focus_keywords">@if(isset($dataTypeContent->focus_keywords)){{ $dataTypeContent->focus_keywords }}@endif</textarea>
                                     </div>
                                 </div>
                             </div>
+                            <!-- ### SEO ANALYSIS ### -->
+                            @include('admin::voyager.posts.seo.panel')
                         </div>
                     </div>
                 </div>
@@ -301,7 +306,6 @@
     <script>
         $('document').ready(function () {
             $('#slug').slugify();
-
         @if ($isModelTranslatable)
             $('.side-body').multilingual({"editing": true});
         @endif
@@ -323,20 +327,28 @@
                $('#confirm_delete_modal').modal('show');
            });
             $('#confirm_delete').on('click', function(){
-               $.post('{{ route('voyager.media.remove') }}', params, function (response) {
-                   if ( response
-                       && response.data
-                       && response.data.status
-                       && response.data.status == 200 ) {
-                        toastr.success(response.data.message);
-                       $image.parent().fadeOut(300, function() { $(this).remove(); })
-                   } else {
-                       toastr.error("Error removing image.");
-                   }
-               });
-                $('#confirm_delete_modal').modal('hide');
-           });
-           $('[data-toggle="tooltip"]').tooltip();
+                $.post('{{ route('voyager.media.remove') }}', params, function (response) {
+                    if ( response
+                        && response.data
+                        && response.data.status
+                        && response.data.status == 200 ) {
+                            toastr.success(response.data.message);
+                        $image.parent().fadeOut(300, function() { $(this).remove(); })
+                    } else {
+                        toastr.error("Error removing image.");
+                    }
+                });
+                    $('#confirm_delete_modal').modal('hide');
+            });
+            $('[data-toggle="tooltip"]').tooltip();
+
+            @if(true)
+                //Populate SEO fields
+                populateFields();
+                $(".form-edit-add").on("load change keyup cut paste", function() {
+                    populateFormStats();
+                });
+            @endif
         });
     </script>
 @stop
