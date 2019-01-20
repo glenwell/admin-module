@@ -64,17 +64,15 @@
                             </div>
                         </div>
 
-                        <div class="panel-body">
-                            @include('voyager::multilingual.input-hidden', [
-                                '_field_name'  => 'body',
-                                '_field_trans' => get_field_translations($dataTypeContent, 'body')
-                            ])
-                            @php
-                                $dataTypeRows = $dataType->{(isset($dataTypeContent->id) ? 'editRows' : 'addRows' )};
-                                $row = $dataTypeRows->where('field', 'body')->first();
-                            @endphp
-                            {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
-                        </div>
+                        @include('voyager::multilingual.input-hidden', [
+                            '_field_name'  => 'body',
+                            '_field_trans' => get_field_translations($dataTypeContent, 'body')
+                        ])
+                        @php
+                            $dataTypeRows = $dataType->{(isset($dataTypeContent->id) ? 'editRows' : 'addRows' )};
+                            $row = $dataTypeRows->where('field', 'body')->first();
+                        @endphp
+                        {!! app('voyager')->formField($row, $dataType, $dataTypeContent) !!}
                     </div><!-- .panel -->
 
                     <div class="panel">
@@ -89,7 +87,7 @@
                         <div class="panel-body">
                             @php
                                 $dataTypeRows = $dataType->{(isset($dataTypeContent->id) ? 'editRows' : 'addRows' )};
-                                $exclude = ['title', 'body', 'excerpt', 'slug', 'status', 'author_id', 'featured', 'image', 'image_meta', 'meta_description', 'focus_keywords'];
+                                $exclude = ['title', 'body', 'excerpt', 'slug', 'status', 'author_id', 'featured', 'image', 'image_meta', 'meta_description', 'focus_keywords', 'seo_score'];
                             @endphp
 
                             @foreach($dataTypeRows as $row)

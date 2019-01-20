@@ -252,7 +252,7 @@ class PostsTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text_area',
-                'display_name' => __('Focus Keywords'),
+                'display_name' => __('Focus Keyword'),
                 'required'     => 0,
                 'browse'       => 0,
                 'read'         => 1,
@@ -360,7 +360,7 @@ class PostsTableSeeder extends Seeder
                 'type'         => 'text',
                 'display_name' => __('SEO Score'),
                 'required'     => 0,
-                'browse'       => 0,
+                'browse'       => 1,
                 'read'         => 0,
                 'edit'         => 1,
                 'add'          => 1,

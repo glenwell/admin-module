@@ -11,7 +11,7 @@ class User extends \TCG\Voyager\Models\User
 
     public function hasPermission($name)
     {
-        return Cache::remember('has_permission_' . $name, 60, function () use ($name) {
+        /* return Cache::remember('has_permission_' . $name, 60, function () use ($name) { */
             $this->loadPermissionsRelations();
 
             $_permissions = $this->roles_all()
@@ -19,28 +19,32 @@ class User extends \TCG\Voyager\Models\User
                             ->pluck('key')->unique()->toArray();
 
             return in_array($name, $_permissions);
-        });
+        /* }); */
     }
 
     private function loadRolesRelations()
     {
-        if (!$this->relationLoaded('role')) {
-            $this->load('role');
-        }
+        /* return Cache::remember('role_roles', 60, function () { */
+            if (!$this->relationLoaded('role')) {
+                $this->load('role');
+            }
 
-        if (!$this->relationLoaded('roles')) {
-            $this->load('roles');
-        }
+            if (!$this->relationLoaded('roles')) {
+                $this->load('roles');
+            }
+        /* }); */
     }
 
     private function loadPermissionsRelations()
     {
         $this->loadRolesRelations();
 
-        if (!$this->role->relationLoaded('permissions')) {
-            $this->role->load('permissions');
-            $this->load('roles.permissions');
-        }
+        /* return Cache::remember('role_permissions', 60, function () { */
+            if (!$this->role->relationLoaded('permissions')) {
+                $this->role->load('permissions');
+                $this->load('roles.permissions');
+            }
+        /* }); */
     }
     
 }

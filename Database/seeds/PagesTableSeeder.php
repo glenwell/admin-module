@@ -184,7 +184,7 @@ class PagesTableSeeder extends Seeder
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
-                'display_name' => __('Focus Keywords'),
+                'display_name' => __('Focus Keyword'),
                 'required'     => 1,
                 'browse'       => 0,
                 'read'         => 1,
@@ -286,13 +286,13 @@ class PagesTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataRow = $this->dataRow($postDataType, 'seo_score');
+        $dataRow = $this->dataRow($pageDataType, 'seo_score');
         if (!$dataRow->exists) {
             $dataRow->fill([
                 'type'         => 'text',
                 'display_name' => __('SEO Score'),
                 'required'     => 0,
-                'browse'       => 0,
+                'browse'       => 1,
                 'read'         => 0,
                 'edit'         => 1,
                 'add'          => 1,

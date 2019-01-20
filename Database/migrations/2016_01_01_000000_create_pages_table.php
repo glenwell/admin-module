@@ -25,6 +25,7 @@ class CreatePagesTable extends Migration
             $table->string('slug')->unique();
             $table->text('meta_description')->nullable();
             $table->text('focus_keywords')->nullable();
+            $table->integer('seo_score')->default(0);
             $table->enum('status', Page::$statuses)->default(Page::STATUS_INACTIVE);
             $table->timestamps();
         });

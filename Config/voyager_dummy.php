@@ -216,7 +216,7 @@ return [
     ],
 
     'additional_js' => [
-        //'js/custom.js',
+        'vendor/admin/assets/js/custom.js',
     ],
 
     'googlemaps' => [
