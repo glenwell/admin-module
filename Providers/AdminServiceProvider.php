@@ -59,7 +59,7 @@ class AdminServiceProvider extends ServiceProvider
     private function bootstrapImageCache()
     {
         $app = $this->app;
-        $config = __DIR__.'/../config/imagecache.php';
+        $config = __DIR__.'/../Config/imagecache.php';
 
         $this->publishes([
             $config => config_path('imagecache.php')

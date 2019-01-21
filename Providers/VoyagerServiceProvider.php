@@ -4,9 +4,9 @@ namespace Modules\Admin\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Arrilot\Widgets\ServiceProvider as WidgetServiceProvider;
 use Intervention\Image\ImageServiceProvider;
 use Larapack\DoctrineSupport\DoctrineSupportServiceProvider;
-use Larapack\VoyagerHooks\VoyagerHooksServiceProvider;
 use TCG\Voyager\Facades\Voyager as VoyagerFacade;
 use TCG\Voyager\Providers\VoyagerEventServiceProvider;
 
@@ -19,9 +19,8 @@ class VoyagerServiceProvider extends \TCG\Voyager\VoyagerServiceProvider
     {
         $this->app->register(VoyagerEventServiceProvider::class);
         $this->app->register(ImageServiceProvider::class);
-        $this->app->register(VoyagerDummyServiceProvider::class);
-        $this->app->register(VoyagerHooksServiceProvider::class);
         $this->app->register(DoctrineSupportServiceProvider::class);
+        $this->app->register(WidgetServiceProvider::class);
 
         $loader = AliasLoader::getInstance();
         $loader->alias('Voyager', VoyagerFacade::class);
@@ -31,15 +30,12 @@ class VoyagerServiceProvider extends \TCG\Voyager\VoyagerServiceProvider
         });
 
         $this->loadHelpers();
-
         $this->registerAlertComponents();
         $this->registerFormFields();
-
         $this->registerConfigs();
 
         if ($this->app->runningInConsole()) {
             $this->registerPublishableResources();
-            /* Do not show voyager's commands */
             $this->registerConsoleCommands();
         }
 
@@ -57,14 +53,21 @@ class VoyagerServiceProvider extends \TCG\Voyager\VoyagerServiceProvider
 
         $publishable = [
             'voyager_assets' => [
-                "{$publishablePath}/resources/assets/" => public_path(config('admin.voyager_assets_path')),
-                /* "{$publishablePath}/resources/views/voyager/" => resource_path(config('voyager.blade_path')), */
+                "{$publishablePath}/Resources/assets/" => public_path(config('admin.voyager_assets_path')),
             ],
             'seeds' => [
-                "{$publishablePath}/database/seeds/" => database_path('seeds'),
+                "{$publishablePath}/Database/seeds/" => database_path('seeds'),
+            ],
+            'content' => [
+                "{$publishablePath}/Publishable/dummy_content/" => storage_path('app/public'),
             ],
             'config' => [
-                "{$publishablePath}/config/voyager.php" => config_path('voyager.php'),
+                "{$publishablePath}/Config/voyager.php" => config_path('voyager.php'),
+                "{$publishablePath}/Config/imagecache.php" => config_path('imagecache.php'),
+                "{$publishablePath}/Config/config.php" => config_path('admin.php'),
+            ],
+            'migrations' => [
+                "{$publishablePath}/database/migrations/" => database_path('migrations'),
             ],
 
         ];
@@ -72,6 +75,13 @@ class VoyagerServiceProvider extends \TCG\Voyager\VoyagerServiceProvider
         foreach ($publishable as $group => $paths) {
             $this->publishes($paths, $group);
         }
+    }
+
+    public function registerConfigs()
+    {
+        $this->mergeConfigFrom(
+            dirname(__DIR__).'/Config/voyager.php', 'voyager'
+        );
     }
 
     /**

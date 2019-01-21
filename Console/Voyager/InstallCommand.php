@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Process\Process;
-use Modules\Admin\Providers\VoyagerDummyServiceProvider;
 use TCG\Voyager\Traits\Seedable;
 use Modules\Admin\Providers\VoyagerServiceProvider;
 
@@ -14,7 +13,7 @@ class InstallCommand extends \TCG\Voyager\Commands\InstallCommand
 {
     use Seedable;
 
-    protected $seedersPath = __DIR__.'/../../database/seeds/';
+    protected $seedersPath = __DIR__.'/../../Database/seeds/';
 
     /**
      * The console command name.
@@ -44,7 +43,7 @@ class InstallCommand extends \TCG\Voyager\Commands\InstallCommand
         $this->info('Publishing the Voyager assets, database, and config files');
 
         // Publish only relevant resources on install
-        $tags = ['voyager_assets', 'seeds'];
+        $tags = ['voyager_assets', 'seeds', 'content', 'config', 'migrations'];
 
         $this->call('vendor:publish', ['--provider' => VoyagerServiceProvider::class, '--tag' => $tags]);
 
@@ -65,19 +64,6 @@ class InstallCommand extends \TCG\Voyager\Commands\InstallCommand
         $this->info('Seeding data into the database');
         $this->seed('VoyagerDatabaseSeeder');
 
-        //Publish with dummy content by default
-        $this->info('Publishing dummy content');
-        $tags = ['dummy_content', 'dummy_config', 'dummy_migrations'];
-        $this->call('vendor:publish', ['--provider' => VoyagerDummyServiceProvider::class, '--tag' => $tags]);
-
-        $this->info('Migrating dummy tables');
-        $this->call('migrate');
-
-        $this->info('Seeding dummy data');
-        $this->seed('VoyagerDummyDatabaseSeeder');
-
-        $this->info('Setting up the hooks');
-        $this->call('hook:setup');
         //End of dummy content
 
         $this->info('Adding the storage symlink to your public folder');
