@@ -53,7 +53,7 @@ class VoyagerServiceProvider extends \TCG\Voyager\VoyagerServiceProvider
 
         $publishable = [
             'voyager_assets' => [
-                "{$publishablePath}/Resources/assets/" => public_path(config('admin.voyager_assets_path')),
+                "{$publishablePath}/Resources/assets/" => public_path(config('admin.voyager_assets_path', '/vendor/admin/assets')),
             ],
             'seeds' => [
                 "{$publishablePath}/Database/seeds/" => database_path('seeds'),
@@ -67,7 +67,7 @@ class VoyagerServiceProvider extends \TCG\Voyager\VoyagerServiceProvider
                 "{$publishablePath}/Config/config.php" => config_path('admin.php'),
             ],
             'migrations' => [
-                "{$publishablePath}/database/migrations/" => database_path('migrations'),
+                "{$publishablePath}/Database/migrations/" => database_path('migrations'),
             ],
 
         ];

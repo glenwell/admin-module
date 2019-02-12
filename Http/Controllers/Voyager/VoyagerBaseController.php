@@ -231,7 +231,7 @@ class VoyagerBaseController extends BaseVoyagerBaseController
         ));
     }
 
-    private function selectView(string $slug, string $breadType)
+    public function selectView(string $slug, string $breadType)
     {
         $view = "admin::voyager.{$slug}.{$breadType}";
 

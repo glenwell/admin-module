@@ -102,8 +102,8 @@ class InstallCommand extends \TCG\Voyager\Commands\InstallCommand
     private function changeDefaultStringLength()
     {
         if($this->version()) {
-            if (file_exists(app_path('Providers\AppServiceProvider.php'))) {
-                $str = file_get_contents(app_path('Providers\AppServiceProvider.php'));  
+            if (file_exists(app_path('Providers/AppServiceProvider.php'))) {
+                $str = file_get_contents(app_path('Providers/AppServiceProvider.php'));  
     
                 if($str !== false && !str_contains($str, 'Schema::defaultStringLength(191)')) {
                     file_put_contents(app_path('Providers\AppServiceProvider.php'), file_get_contents(__DIR__.'/../stubs/app-service-provider.stub'));
