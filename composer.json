@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\Admin\\": ""
+            "Modules\\Admin\\": "src"
         }
     },
     "require": {
@@ -34,7 +34,7 @@
         "laravel/framework": "~5.7.0",
         "nwidart/laravel-modules": "^4.0",
         "predis/predis": "^1.1",
-        "tcg/voyager": "^1.1.12"
+        "tcg/voyager": "1.1.*"
         
     },
     "require-dev": {
